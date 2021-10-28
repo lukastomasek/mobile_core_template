@@ -47,7 +47,7 @@ public class SingeltonTemplate<T> : MonoBehaviour where T : MonoBehaviour
 
     private void OnApplicationQuit() => _shuttingDown = true;
 
-    //private void OnDestroy() => _shuttingDown = true;
+    //lprivate void OnDestroy() => _shuttingDown = true;
 
 
 }
