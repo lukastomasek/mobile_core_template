@@ -5,7 +5,6 @@
 This template will be used for creating mobile games (_iOS_ and _Android_).
 This template should take the tedious game dev setup away to focus on **gameplay**
 
----
 
 ---
 
