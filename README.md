@@ -14,7 +14,7 @@ This template should take the tedious game dev setup away to focus on **gameplay
    * Session Manager
    * UI Manager
       - Out of the box UI
-      - Moduls and windows
+      - Modals and windows
       - Neccessary UI Elements such as `settings,options,rate menu,..`
    * Ads Manager
       - Unity Ads
