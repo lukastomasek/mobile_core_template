@@ -297,7 +297,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 861127266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3795b1e403944f5b898ea571bf2e981, type: 3}
+  m_Script: {fileID: 11500000, guid: 8217a670402d641e4b06d608165e5ed9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &947318295
@@ -595,15 +595,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 861127268}
-        m_TargetAssemblyTypeName: Mobile_Core.LevelLoader, Project.Manager
-        m_MethodName: LoadLevel
-        m_Mode: 1
+        m_TargetAssemblyTypeName: Mobile_Core.SceneLoader, Project.Core
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Main
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1575932116
@@ -657,7 +657,7 @@ GameObject:
   m_Layer: 0
   m_Name: Main Menu
   m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: 2ce8ea82417614c39ab27ad629d5d71b, type: 3}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 1705098951}
   - component: {fileID: 1705098952}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: $Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
