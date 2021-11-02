@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Mobile_Core
 {
-    public enum GameState
+    public enum AppStates
     {
         APP_START,
         APP_UPDATE,
@@ -24,14 +24,14 @@ namespace Mobile_Core
         [SerializeField] int pauseFramerate = 15;
         [SerializeField] int gameFramerate = 30;
 
-        public GameState gameState;
+        public AppStates appState;
 
         protected GameManager() { }
 
         private void Start()
         {
-            gameState = GameState.APP_START;
-            SetTargetFramerate(gameState);
+            appState = AppStates.APP_UPDATE;
+            SetTargetFramerate(appState);
         }
 
 
@@ -40,46 +40,62 @@ namespace Mobile_Core
             //testing
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                gameState = GameState.APP_PAUSE;
+                appState = AppStates.APP_PAUSE;
             }
             else if (Input.GetKeyUp(KeyCode.Space))
             {
-                gameState = GameState.APP_UPDATE;
+                appState = AppStates.APP_UPDATE;
             }
 
-            switch (gameState)
+            switch (appState)
             {
-                case GameState.APP_UPDATE:
-                    SetTargetFramerate(gameState);
+                case AppStates.APP_UPDATE:
+                    SetTargetFramerate(appState);
                     break;
 
-                case GameState.APP_PAUSE:
-                    SetTargetFramerate(gameState);
+                case AppStates.APP_PAUSE:
+                    SetTargetFramerate(appState);
                     break;
 
-                case GameState.APP_EXIT:
+                case AppStates.APP_EXIT:
                     break;
 
                 default:
-                    gameState = GameState.APP_START;
+                    appState = AppStates.APP_START;
+                    Time.timeScale = 1;
                     break;
             }
 
         }
 
-        void SetTargetFramerate(GameState state)
+        void SetTargetFramerate(AppStates state)
         {
-            if (state == GameState.APP_UPDATE || state == GameState.APP_START)
+            if (state == AppStates.APP_UPDATE || state == AppStates.APP_START)
             {
                 if (Application.targetFrameRate != gameFramerate)
                     Application.targetFrameRate = gameFramerate;
             }
-            if (state == GameState.APP_PAUSE)
+            if (state == AppStates.APP_PAUSE)
             {
                 if (Application.targetFrameRate != pauseFramerate)
                     Application.targetFrameRate = pauseFramerate;
             }
             //Debug.Log(Application.targetFrameRate);
+        }
+
+
+        public void PauseGame(bool isPaused)
+        {
+            if (isPaused)
+            {
+                appState = AppStates.APP_PAUSE;
+                Time.timeScale = 0;
+            }
+            else
+            {
+                appState = AppStates.APP_UPDATE;
+                Time.timeScale = 1;
+            }
         }
     }
 

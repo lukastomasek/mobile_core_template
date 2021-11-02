@@ -8,7 +8,7 @@ public class Tester : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        print(GameManager.Instance.gameState);
+        print(GameManager.Instance.appState);
     }
 
     private void Update()
@@ -20,8 +20,8 @@ public class Tester : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            GameManager.Instance.gameState = GameState.APP_UPDATE;
-            print(GameManager.Instance.gameState);
+            GameManager.Instance.appState = AppStates.APP_UPDATE;
+            print(GameManager.Instance.appState);
         }
     }
 }
