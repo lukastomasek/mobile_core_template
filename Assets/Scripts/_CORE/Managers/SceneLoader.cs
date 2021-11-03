@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Mobile_Core
 {
+    /// <summary>
+    ///  modular scene loader
+    /// </summary>
+
     public class SceneLoader : MonoBehaviour
     {
         AsyncOperation _asyncOperation;

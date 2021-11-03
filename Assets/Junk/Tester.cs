@@ -1,27 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Mobile_Core;
 
-public class Tester : MonoBehaviour
+namespace Mobile_Test
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Tester : MonoBehaviour
     {
-        print(GameManager.Instance.appState);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Start is called before the first frame update
+        void Start()
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            GameManager.Instance.appState = AppStates.APP_UPDATE;
             print(GameManager.Instance.appState);
         }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GameManager.Instance.appState = AppStates.APP_UPDATE;
+                print(GameManager.Instance.appState);
+            }
+        }
     }
+
 }
