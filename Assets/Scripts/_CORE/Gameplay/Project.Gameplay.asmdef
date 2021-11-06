@@ -1,11 +1,7 @@
 {
-    "name": "Project.Junk",
+    "name": "Project.Gameplay",
     "rootNamespace": "",
-    "references": [
-        "GUID:a9d316df8e293405aa1f670892be7f39",
-        "GUID:776d03a35f1b52c4a9aed9f56d7b4229",
-        "GUID:f38b475a9a8d841de8f9ef9c12eac31b"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

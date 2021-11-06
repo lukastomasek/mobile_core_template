@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using NaughtyAttributes;
+using Mobile_Core;
 
 namespace Mobile_UI
 {
@@ -16,40 +17,39 @@ namespace Mobile_UI
 
         WaitForSecondsRealtime _waitDelay = new WaitForSecondsRealtime(0.05f);
 
+        
 
-        private void Update()
+
+        private void OnEnable()
         {
-            if (Input.GetKey(KeyCode.T))
-            {
-                UpdateCurrencyText(0, 50);
-            }
+            Wallet.onUpdate += UpdateCurrencyText;
+        }
+
+        private void OnDisable()
+        {
+            Wallet.onUpdate -= UpdateCurrencyText;
+        }
+
+        public void UpdateMoney()
+        {
+
+            Wallet.onUpdate?.Invoke(0,50);
         }
 
 
         public void UpdateCurrencyText(int currentAmount, int ammountReceived)
         {
-            StartCoroutine(IUpdate(currentAmount, ammountReceived));
+           StartCoroutine(IUpdate(currentAmount, ammountReceived));         
+
         }
 
         IEnumerator IUpdate(int current, int amount)
         {
             int max = current + amount;
 
-            //current += 1;
-
-            //yield return new WaitForSecondsRealtime(0.1f);
-
-            //currencyTxt.SetText($"${current}");
-
-            //yield return new WaitForEndOfFrame();
-
-            
-          //currencyTxt.rectTransform.localScale = new Vector3((int)txtScaleModifier.Evaluate(1f),(int) txtScaleModifier.Evaluate(1f), 0f);
 
             while (current != max)
             {
-
-
                 current += 1;
 
                 yield return _waitDelay;
