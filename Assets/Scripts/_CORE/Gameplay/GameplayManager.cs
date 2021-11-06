@@ -1,6 +1,7 @@
 using UnityEngine;
-
-
+using UnityEngine.UI;
+using NaughtyAttributes;
+using Mobile_Core;
 
 
 namespace Mobile_Gameplay
@@ -21,11 +22,25 @@ namespace Mobile_Gameplay
         [SerializeField] GameObject player;
         [SerializeField] GameObject spawnManager;
 
+        [Space(20), HorizontalLine(color: EColor.Blue), Header("SETTINGS")]
+        [SerializeField, Required] GameObject uiPanel;
+        [SerializeField, Required] Button restartBtn;
+        [SerializeField, Required] Button quitBtn;
 
         private void Awake()
         {
             if (instance == null)
                 instance = this;
+
+            restartBtn.onClick.AddListener(() =>
+            {
+                SceneLoader.Instance.LoadScene("Test_Scene");
+            });
+
+            quitBtn.onClick.AddListener(() =>
+            {
+                SceneLoader.Instance.LoadScene("Test");
+            });
         }
 
         private void Start()
@@ -40,6 +55,7 @@ namespace Mobile_Gameplay
                 case GameStates.GAME_OVER:
                     player.SetActive(false);
                     spawnManager.SetActive(false);
+                    uiPanel.SetActive(true);
                     break;
                 case GameStates.GAME_WON:
                     break;

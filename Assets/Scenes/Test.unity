@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 861127267}
   - component: {fileID: 861127268}
   m_Layer: 0
-  m_Name: Level Loader
+  m_Name: $Level Loader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,12 +281,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 861127266}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1393453348}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &861127268
 MonoBehaviour:
@@ -395,6 +395,7 @@ GameObject:
   - component: {fileID: 1182304012}
   - component: {fileID: 1182304011}
   - component: {fileID: 1182304010}
+  - component: {fileID: 1182304014}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -473,12 +474,49 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182304009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3051529, y: 1.2204418, z: -0.14659715}
+  m_LocalPosition: {x: -1.535, y: 0.927, z: -1.329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1182304014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182304009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41da3e63b93474af38429db2b3d7a55b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  motionSpeed: 2.59
 --- !u!1 &1393453347
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +545,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1587310199}
-  - {fileID: 861127267}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -603,7 +640,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Main
+          m_StringArgument: Test_Scene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1575932116
@@ -687,7 +724,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1712e64cb9ec24a2087e0f92d4c7a2d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: 
 --- !u!1 &1705098950
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,7 +899,7 @@ RectTransform:
   m_Children:
   - {fileID: 1742698497}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -934,7 +970,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2036641361
 GameObject:

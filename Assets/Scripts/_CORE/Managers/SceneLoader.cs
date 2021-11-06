@@ -8,11 +8,12 @@ namespace Mobile_Core
     ///  modular scene loader
     /// </summary>
 
-    public class SceneLoader : MonoBehaviour
+    public class SceneLoader : SingeltonTemplate<SceneLoader>
     {
         AsyncOperation _asyncOperation;
         float _loadingTimer = 0f;
 
+        protected SceneLoader () {}
 
 
         public void LoadScene(string id)
@@ -25,7 +26,7 @@ namespace Mobile_Core
         {
             _asyncOperation = SceneManager.LoadSceneAsync(id);
 
-            if(_asyncOperation == null)
+            if (_asyncOperation == null)
             {
                 Debug.LogError($"missing scene: {_asyncOperation}");
 

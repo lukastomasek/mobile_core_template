@@ -1,7 +1,11 @@
 {
     "name": "Project.Gameplay",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21",
+        "GUID:776d03a35f1b52c4a9aed9f56d7b4229",
+        "GUID:a9d316df8e293405aa1f670892be7f39"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
