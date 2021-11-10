@@ -8,21 +8,28 @@ namespace Mobile_Core
         public static int currentAmount;
         private static int ammountRecieved;
 
-        //public delegate void  OnUpdateWallet(int currentAmount, int ammountReceiving);
-        //public static event OnUpdateWallet OnUpdate;
-
         public static Action<int, int> onUpdate;
 
         public static void AddMoney(int receivingAmount)
         {
             ammountRecieved = receivingAmount;
 
-          
+            SaveData data = new SaveData()
+            {
+               playerCurrency = currentAmount + ammountRecieved,
+            };
+
+
+            SaveManager.Save(data);
+
+            // reset amount recieved after saving 
+            ammountRecieved = 0;
+
         }
 
         public static void RemoveMoney(int removingAmount)
         {
-            if(currentAmount < removingAmount)
+            if (currentAmount < removingAmount)
             {
                 Debug.Log("<b>Don't have enough currency!</b>");
                 return;
@@ -32,6 +39,13 @@ namespace Mobile_Core
 
             if (currentAmount <= 0)
                 currentAmount = 0;
+
+            SaveData data = new SaveData()
+            {
+                playerCurrency = currentAmount,
+            };
+
+            SaveManager.Save(data);
 
         }
     }

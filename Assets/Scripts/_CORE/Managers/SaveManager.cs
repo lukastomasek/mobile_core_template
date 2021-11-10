@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Mobile_Core
 {
-    public class SaveManager<T>
+    public static class SaveManager
     {
         static string _directory = "/GameData/";
         static string _fileName = "MyData.txt";
@@ -12,7 +12,7 @@ namespace Mobile_Core
         static bool _fileExist = false;
 
 
-        public static void Save(T data)
+        public static void Save(SaveData data)
         {
             string dir = Application.persistentDataPath + _directory;
 
@@ -27,35 +27,53 @@ namespace Mobile_Core
             File.WriteAllText(dir + _fileName, json);
         }
 
-        //public static T Load()
-        //{
-        //    string fullPath = Application.persistentDataPath + _directory + _fileName;
+        public static SaveData Load()
+        {
+            var fullPath = Application.persistentDataPath + _directory + _fileName;
 
-        //    T data;
+            SaveData data = new SaveData();
 
-        //    if (File.Exists(fullPath))
-        //    {
-        //        var json = File.ReadAllText(fullPath);
+            if (Directory.Exists(fullPath))
+            {
+                var json = File.ReadAllText(fullPath);
 
-        //        data = JsonUtility.FromJson<T>(json);
+                data = JsonUtility.FromJson<SaveData>(json);
 
+            }
+            else
+            {
+                Debug.LogWarning($"{0}: File Does not exist, creating new save file: <b>{data} </b>. ");
 
-        //    }
-        //    else
-        //    {
-        //        Debug.LogWarning("Save File Doesn't Exist, {creating new fiel}");
+                SaveData newFile = new SaveData();
 
-        //        //data = "";
+                Save(newFile);
+            }
 
-        //        //Save(data);
-        //    }
+            return data;
+        }
 
+        public static void ResetData()
+        {
+            var fullPath = Application.persistentDataPath + _directory + _fileName;
 
-        //    return data;
+            SaveData data = new SaveData();
 
-        //}
+            if (Directory.Exists(fullPath))
+            {
+                var json = File.ReadAllText(fullPath);
 
+                data = JsonUtility.FromJson<SaveData>(json);
+
+                data.Reset();
+            }
+            else
+            {
+                Debug.LogWarning("{0}: No Data to reset!");
+            }
+        }
     }
+
+
 
 
 }

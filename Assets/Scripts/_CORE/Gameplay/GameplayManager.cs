@@ -53,9 +53,9 @@ namespace Mobile_Gameplay
             switch (state)
             {
                 case GameStates.GAME_OVER:
-                    player.SetActive(false);
-                    spawnManager.SetActive(false);
-                    uiPanel.SetActive(true);
+                    //player.SetActive(false);
+                    //spawnManager.SetActive(false);
+                    //uiPanel.SetActive(true);
                     break;
                 case GameStates.GAME_WON:
                     break;
