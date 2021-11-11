@@ -30,11 +30,11 @@ namespace Mobile_UI
             Wallet.onUpdate -= UpdateCurrencyText;
         }
 
-        public void UpdateMoney()
-        {
+        //public void UpdateMoney()
+        //{
 
-            Wallet.onUpdate?.Invoke(0,50);
-        }
+        //    Wallet.onUpdate?.Invoke(0,50);
+        //}
 
 
         public void UpdateCurrencyText(int currentAmount, int ammountReceived)

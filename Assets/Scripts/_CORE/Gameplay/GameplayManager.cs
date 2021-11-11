@@ -4,6 +4,7 @@ using NaughtyAttributes;
 using Mobile_Core;
 
 
+
 namespace Mobile_Gameplay
 {
 
@@ -27,6 +28,9 @@ namespace Mobile_Gameplay
         [SerializeField, Required] Button restartBtn;
         [SerializeField, Required] Button quitBtn;
 
+
+        ScoreManager _score;
+
         private void Awake()
         {
             if (instance == null)
@@ -41,6 +45,27 @@ namespace Mobile_Gameplay
             {
                 SceneLoader.Instance.LoadScene("Test");
             });
+
+            _score = FindObjectOfType<ScoreManager>();
+
+            
+        }
+
+
+        private void OnEnable()
+        {
+            ScoreManager.OnWon += GameWon;
+        }
+
+        private void OnDisable()
+        {
+            ScoreManager.OnWon -= GameWon;
+        }
+
+        void GameWon()
+        {
+            Debug.Log("won the game");
+            OnGameState(GameStates.GAME_WON);
         }
 
         private void Start()
@@ -53,11 +78,17 @@ namespace Mobile_Gameplay
             switch (state)
             {
                 case GameStates.GAME_OVER:
-                    //player.SetActive(false);
-                    //spawnManager.SetActive(false);
-                    //uiPanel.SetActive(true);
+                    player.SetActive(false);
+                    spawnManager.SetActive(false);
+                    uiPanel.SetActive(true);
                     break;
                 case GameStates.GAME_WON:
+                    player.SetActive(false);
+                    spawnManager.SetActive(false);
+                    uiPanel.SetActive(true);
+                    // update wallet 
+                    Wallet.AddMoney(_score.TotalScore());
+                    Wallet.onUpdate?.Invoke(Wallet.currentAmount, _score.TotalScore());
                     break;
             }
         }

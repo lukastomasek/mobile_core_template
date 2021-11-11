@@ -10,18 +10,18 @@ namespace Mobile_Core
 
         public static Action<int, int> onUpdate;
 
+        
         public static void AddMoney(int receivingAmount)
         {
             ammountRecieved = receivingAmount;
 
-            SaveData data = new SaveData()
-            {
-               playerCurrency = currentAmount + ammountRecieved,
-            };
+            SaveData data = new SaveData();
 
-
+            data.playerCurrency = currentAmount + ammountRecieved;
+             
             SaveManager.Save(data);
 
+           
             // reset amount recieved after saving 
             ammountRecieved = 0;
 
@@ -46,6 +46,23 @@ namespace Mobile_Core
             };
 
             SaveManager.Save(data);
+
+        }
+
+
+        public static void ResetMoney()
+        {
+            currentAmount = 0;
+        }
+
+
+        public static void Load()
+        {
+            SaveData data = new SaveData();
+
+            data = SaveManager.Load();
+
+            currentAmount = data.playerCurrency;
 
         }
     }

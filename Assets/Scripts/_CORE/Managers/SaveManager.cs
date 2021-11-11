@@ -25,6 +25,8 @@ namespace Mobile_Core
             var json = JsonUtility.ToJson(data, true);
 
             File.WriteAllText(dir + _fileName, json);
+
+            Debug.Log("<color=green> SAVING </color>");
         }
 
         public static SaveData Load()
@@ -33,11 +35,13 @@ namespace Mobile_Core
 
             SaveData data = new SaveData();
 
-            if (Directory.Exists(fullPath))
+            if (File.Exists(fullPath))
             {
                 var json = File.ReadAllText(fullPath);
 
                 data = JsonUtility.FromJson<SaveData>(json);
+
+                Debug.Log("<color=green> LOADING </color>");
 
             }
             else
