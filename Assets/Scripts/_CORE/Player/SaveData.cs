@@ -3,12 +3,18 @@ using System;
 namespace Mobile_Core
 {
     [Serializable]
-    public class SaveData 
+    public class SaveData
     {
         // player data goes here...
 
-        public int playerCurrency;    
+        public int playerCurrency;
 
+
+        // options data
+        public bool playMusic;
+        public bool playSound;
+        public bool enableHaptic;
+       
 
 
         // reset all data
@@ -16,5 +22,6 @@ namespace Mobile_Core
         {
             playerCurrency = 0;
         }
+
     }
 }

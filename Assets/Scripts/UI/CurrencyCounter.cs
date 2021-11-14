@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using NaughtyAttributes;
@@ -16,9 +15,6 @@ namespace Mobile_UI
         [SerializeField] AnimationCurve txtScaleModifier;
 
         WaitForSecondsRealtime _waitDelay = new WaitForSecondsRealtime(0.05f);
-
-        
-
 
         private void OnEnable()
         {
@@ -39,7 +35,7 @@ namespace Mobile_UI
 
         public void UpdateCurrencyText(int currentAmount, int ammountReceived)
         {
-           StartCoroutine(IUpdate(currentAmount, ammountReceived));         
+            StartCoroutine(IUpdate(currentAmount, ammountReceived));
 
         }
 

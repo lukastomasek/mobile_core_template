@@ -61,9 +61,7 @@ namespace Mobile_Test
 
                 }
                 else if (_percantage >= 50)
-                {
-
-                  
+                {        
 
                     float randomXPos = Random.Range(minX, maxX);
                     GameObject obstacle = Instantiate(obstaclePrefabs, new Vector3(randomXPos, 3, -5), Quaternion.identity);
