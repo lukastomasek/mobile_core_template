@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Mobile_UI;
 
 namespace Mobile_Core
 {
@@ -36,6 +37,12 @@ namespace Mobile_Core
             {
                 panel.SetActive(true);
             }
+        }
+
+        // TESTING
+        public void ModalMessage()
+        {
+            ModalWindow.instance.ShowModal("CANNOT ADD MONEY", "Error Adding Money, please try again later!");
         }
      
     }

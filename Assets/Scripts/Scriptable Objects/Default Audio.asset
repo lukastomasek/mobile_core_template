@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05ce9297f11574f2b9476dd5df335bcf, type: 3}
+  m_Name: Default Audio
+  m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: 3ad757540026a490e82c391c611b7524, type: 3}
+  closeSound: {fileID: 8300000, guid: 35f528a79f15b4c4e9eff9f24dadd2e7, type: 3}
+  buttonSound: {fileID: 8300000, guid: 6df314d609a31451da68d2e334a2042b, type: 3}
+  backgroundMusic:
+  - {fileID: 8300000, guid: abe41b5300ee5471196cd4d7dc05fdf5, type: 3}
+  - {fileID: 8300000, guid: 70914df98d24a44b6bcd4f5d47ba75a1, type: 3}
+  - {fileID: 8300000, guid: 4676205d6d3344aeab61ed4ffcd9f60b, type: 3}
