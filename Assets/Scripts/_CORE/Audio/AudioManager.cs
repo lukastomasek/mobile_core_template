@@ -18,8 +18,12 @@ namespace Mobile_Core
         GameObject _backgroundObject, _soundObject;
         AudioSource _bgAudio, _soundAudio;
 
+        SaveData _data = new SaveData();
+
+
         private void Awake()
         {
+
             _backgroundObject = new GameObject("Background Audio");
             _soundObject = new GameObject("Sound Audio");
 
@@ -31,7 +35,16 @@ namespace Mobile_Core
                 _bgAudio = _backgroundObject.AddComponent<AudioSource>();
                 _bgAudio.loop = true;
                 _bgAudio.playOnAwake = true;
-                _bgAudio.volume = backgroundMusicVol;
+
+                if (_data != null)
+                {
+                    //_bgAudio.mute = !_data.playMusic;
+                }
+                else
+                {
+                    _bgAudio.volume = backgroundMusicVol;
+
+                }
             }
 
             if (_soundObject != null)
@@ -39,7 +52,16 @@ namespace Mobile_Core
                 _soundAudio = _soundObject.AddComponent<AudioSource>();
                 _soundAudio.loop = false;
                 _soundAudio.playOnAwake = false;
-                _soundAudio.volume = soundVol;
+
+                if (_data != null)
+                {
+                    //_soundAudio.mute = !_data.playSound;
+                }
+                else
+                {
+
+                    _soundAudio.volume = soundVol;
+                }
             }
 
         }
@@ -47,8 +69,35 @@ namespace Mobile_Core
 
         private void Start()
         {
-            _bgAudio.PlayOneShot(audioSo.PlayRandomMusic());
+            _bgAudio.clip = audioSo.PlayRandomMusic();
+            _bgAudio.Play();
+
         }
+
+        private void OnEnable()
+        {
+            SettingsManager.changeMusicSettings += MusicSetting;
+            SettingsManager.changeSoundSettings += SoundSettings;
+        }
+
+        private void OnDestroy()
+        {
+            SettingsManager.changeMusicSettings -= MusicSetting;
+            SettingsManager.changeSoundSettings -= SoundSettings;
+        }
+
+
+        public void MusicSetting(bool isMute)
+        {
+            _bgAudio.mute = !isMute;
+        }
+
+        public void SoundSettings(bool isMute)
+        {
+            _soundAudio.mute = !isMute;
+        }
+
+
 
         public void PlayTickSound() => _soundAudio.PlayOneShot(audioSo.clickSound);
 

@@ -9,19 +9,27 @@ namespace Mobile_Core
     /// </summary>
     public class MainMenu : MonoBehaviour
     {
+
+        public static MainMenu instance;
+
         [SerializeField] TextMeshProUGUI coinsTxt;
 
+        SaveData _data = new SaveData();
 
-        private void Start()
+        private void Awake()
         {
-            SaveData data = new SaveData();
+            if (instance == null)
+                instance = this;
+            else
+                Destroy(gameObject);
 
-            data = SaveManager.Load();
+
+            _data = SaveManager.Load();
 
 
-            if(data != null)
+            if (_data != null)
             {
-                coinsTxt.SetText($"${data.playerCurrency}");
+                coinsTxt.SetText($"${_data.playerCurrency}");
             }
             else
             {
@@ -29,6 +37,8 @@ namespace Mobile_Core
             }
 
         }
+
+        public SaveData GetData() => _data;
 
 
         public void OpenPanel(GameObject panel)
@@ -44,7 +54,7 @@ namespace Mobile_Core
         {
             ModalWindow.instance.ShowModal("CANNOT ADD MONEY", "Error Adding Money, please try again later!");
         }
-     
+
     }
 
 }

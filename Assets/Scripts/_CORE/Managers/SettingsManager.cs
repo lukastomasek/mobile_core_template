@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using NaughtyAttributes;
-
+using System;
 
 namespace Mobile_Core
 {
@@ -16,34 +15,45 @@ namespace Mobile_Core
         [SerializeField] Toggle soundToggle;
         [SerializeField] Toggle hapticsToggle;
 
-        SaveData data = new SaveData();
+        MainMenu _main;
+        SaveData _data;
+
+        public static Action<bool> changeMusicSettings;
+        public static Action<bool> changeSoundSettings;
 
 
         private void Start()
         {
-            data = SaveManager.Load();
+            _main = MainMenu.instance;
+            _data = _main.GetData();
 
-            if(data == null)
+            if (_data == null)
             {
-                data.playSound = true;
-                data.playMusic = true;
-                data.enableHaptic = true;
+                _data.playSound = true;
+                _data.playMusic = true;
+                _data.enableHaptic = true;
             }
 
-            if (data.enableHaptic == true)
+            if (_data.enableHaptic == true)
                 hapticsToggle.isOn = true;
             else
                 hapticsToggle.isOn = false;
 
-            if (data.playMusic == true)
+            if (_data.playMusic == true)
                 musicToggle.isOn = true;
             else
                 musicToggle.isOn = false;
 
-            if (data.playSound == true)
+            if (_data.playSound == true)
                 soundToggle.isOn = true;
             else
                 soundToggle.isOn = false;
+
+            changeMusicSettings(musicToggle.isOn);
+            changeSoundSettings(soundToggle.isOn);
+
+            Debug.Log($"music is: {_data.playMusic}");
+            Debug.Log($"sound is: {_data.playSound}");
         }
 
 
@@ -52,43 +62,46 @@ namespace Mobile_Core
         {
             if (toggle.isOn)
             {
-                data.playMusic = true;
+                _data.playMusic = true;
             }
             else
             {
-                data.playMusic = false;
+                _data.playMusic = false;
             }
 
-            SaveManager.Save(data);
+            SaveManager.Save(_data);
+            changeMusicSettings(toggle.isOn);
         }
 
         public void ToggleSoundFx(Toggle toggle)
         {
             if (toggle.isOn)
             {
-                data.playSound = true;
+                _data.playSound = true;
 
             }
             else
             {
-                data.playSound = false;
+                _data.playSound = false;
             }
 
-            SaveManager.Save(data);
+            SaveManager.Save(_data);
+            changeSoundSettings(toggle.isOn);
+
         }
 
         public void ToggleHaptics(Toggle toggle)
         {
             if (toggle.isOn)
             {
-                data.enableHaptic = true;
+                _data.enableHaptic = true;
             }
             else
             {
-                data.enableHaptic = false;
+                _data.enableHaptic = false;
             }
 
-            SaveManager.Save(data);
+            SaveManager.Save(_data);
         }
 
 
