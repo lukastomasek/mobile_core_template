@@ -52,8 +52,8 @@ namespace Mobile_Core
             changeMusicSettings(musicToggle.isOn);
             changeSoundSettings(soundToggle.isOn);
 
-            Debug.Log($"music is: {_data.playMusic}");
-            Debug.Log($"sound is: {_data.playSound}");
+            //Debug.Log($"music is: {_data.playMusic}");
+            //Debug.Log($"sound is: {_data.playSound}");
         }
 
 

@@ -26,12 +26,23 @@ namespace Mobile_Core
 
         public AppStates appState;
 
+
+        SaveData _data = new SaveData();
+
         protected GameManager() { }
 
         private void Start()
         {
             appState = AppStates.APP_UPDATE;
             SetTargetFramerate(appState);
+
+            _data = SaveManager.Load();
+        }
+
+
+        public SaveData GetData
+        {
+            get { return _data; }
         }
 
 
