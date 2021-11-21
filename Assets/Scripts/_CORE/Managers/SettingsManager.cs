@@ -105,6 +105,13 @@ namespace Mobile_Core
         }
 
 
+        public void OpenCreditPanel(GameObject panel)
+        {
+            if (!panel.activeInHierarchy)
+                panel.SetActive(true);
+        }
+
+
         public void ClosePanel(GameObject panel)
         {
             panel.SetActive(false);

@@ -1,6 +1,7 @@
 using UnityEngine;
 using Mobile_Gameplay;
 using Mobile_UI;
+using UnityEngine.SceneManagement;
 
 namespace Mobile_Core
 {
@@ -17,12 +18,15 @@ namespace Mobile_Core
 
         private void Start()
         {
-            _gameplay = GameplayManager.instance;
-            _interface = FindObjectOfType<InterfaceManager>();
+            if (SceneManager.GetActiveScene().buildIndex != 0) {
 
-            if (_gameplay.Data.showRatingPanel == TagManager.SHOW_RATING_PANEL_COUNTER)
-            {
-                // show rating panel
+                _gameplay = GameplayManager.instance;
+                _interface = FindObjectOfType<InterfaceManager>();
+
+                if (_gameplay.Data.showRatingPanel == TagManager.SHOW_RATING_PANEL_COUNTER)
+                {
+                    // show rating panel
+                }
             }
         }
 
