@@ -23,18 +23,6 @@ namespace Mobile_Gameplay
         [SerializeField] GameObject player;
         [SerializeField] GameObject spawnManager;
 
-        [Header("UI/BUTTONS")]
-        [Space(20), HorizontalLine(color: EColor.Blue)]
-        [SerializeField, Required] GameObject uiPanel;
-        [SerializeField, Required] Button restartBtn;
-        [SerializeField, Required] Button quitBtn;
-
-        [Header("UI/LOADING")]
-        [Space(20), HorizontalLine(color: EColor.Green)]
-        [Required] public GameObject loadingBackground;
-        [Required] public Image loadingProgressImage;
-        [Required] public TextMeshProUGUI loadingTxt;
-
 
         ScoreManager _score;
 
@@ -82,12 +70,12 @@ namespace Mobile_Gameplay
                 case GameStates.GAME_OVER:
                     player.SetActive(false);
                     spawnManager.SetActive(false);
-                    uiPanel.SetActive(true);
+                    //uiPanel.SetActive(true);
                     break;
                 case GameStates.GAME_WON:
                     player.SetActive(false);
                     spawnManager.SetActive(false);
-                    uiPanel.SetActive(true);
+                    //uiPanel.SetActive(true);
                     // update wallet 
                     Wallet.AddMoney(_score.TotalScore());
                     Wallet.onUpdate?.Invoke(Wallet.currentAmount, _score.TotalScore());

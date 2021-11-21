@@ -17,15 +17,15 @@ namespace Mobile_Core
         protected SceneLoader() { }
 
 
-        public void LoadScene(string id, GameObject loadingBackground, Image loadingProgress, TMPro.TextMeshProUGUI loadingTxt)
+        public void LoadScene(int id, GameObject loadingBackground, Image loadingProgress, TMPro.TextMeshProUGUI loadingTxt)
         {
             StartCoroutine(ILoadLevel(id, loadingBackground, loadingProgress, loadingTxt));
         }
 
 
-        IEnumerator ILoadLevel(string id, GameObject loadingBackground, Image loadingProgress, TMPro.TextMeshProUGUI loadingTxt)
+        IEnumerator ILoadLevel(int id, GameObject loadingBackground, Image loadingProgress, TMPro.TextMeshProUGUI loadingTxt)
         {
-            _asyncOperation = SceneManager.LoadSceneAsync(id);
+            _asyncOperation = SceneManager.LoadSceneAsync(id, LoadSceneMode.Single);
 
             if (_asyncOperation == null)
             {

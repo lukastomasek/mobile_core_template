@@ -55,7 +55,9 @@ namespace Mobile_Core
         // test
         public void LoadLevel()
         {
-            SceneLoader.Instance.LoadScene("Test_Scene", loadingBackground,
+            int level = 1;
+
+            SceneLoader.Instance.LoadScene(level, loadingBackground,
                 loadingProgressImage, loadingTxt
                 );
         }
