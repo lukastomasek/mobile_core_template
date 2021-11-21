@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using NaughtyAttributes;
 using Mobile_Core;
-
+using TMPro;
 
 
 namespace Mobile_Gameplay
@@ -19,37 +19,38 @@ namespace Mobile_Gameplay
     {
         public static GameplayManager instance;
 
-        [SerializeField, Header("TESTING")]GameStates gameState;
+        [SerializeField, Header("TESTING")] GameStates gameState;
         [SerializeField] GameObject player;
         [SerializeField] GameObject spawnManager;
 
-        [Space(20), HorizontalLine(color: EColor.Blue), Header("SETTINGS")]
+        [Header("UI/BUTTONS")]
+        [Space(20), HorizontalLine(color: EColor.Blue)]
         [SerializeField, Required] GameObject uiPanel;
         [SerializeField, Required] Button restartBtn;
         [SerializeField, Required] Button quitBtn;
 
+        [Header("UI/LOADING")]
+        [Space(20), HorizontalLine(color: EColor.Green)]
+        [Required] public GameObject loadingBackground;
+        [Required] public Image loadingProgressImage;
+        [Required] public TextMeshProUGUI loadingTxt;
+
 
         ScoreManager _score;
+
+        public SaveData Data { get; set; }
 
         private void Awake()
         {
             if (instance == null)
                 instance = this;
 
-            //restartBtn.onClick.AddListener(() =>
-            //{
-            //    SceneLoader.Instance.LoadScene("Test_Scene");
-            //});
-
-            //quitBtn.onClick.AddListener(() =>
-            //{
-            //    SceneLoader.Instance.LoadScene("Test");
-            //});
 
             _score = FindObjectOfType<ScoreManager>();
 
-            
+
         }
+
 
 
         private void OnEnable()
@@ -71,6 +72,7 @@ namespace Mobile_Gameplay
         private void Start()
         {
             gameState = GameStates.GAME_START;
+            Data = SaveManager.Load();
         }
 
         public void OnGameState(GameStates state)
@@ -93,8 +95,8 @@ namespace Mobile_Gameplay
             }
         }
 
-      
-      
+
+
 
     }
 

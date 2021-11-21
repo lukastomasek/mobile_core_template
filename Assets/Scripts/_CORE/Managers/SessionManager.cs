@@ -1,4 +1,5 @@
 using UnityEngine;
+using Mobile_Gameplay;
 
 namespace Mobile_Core
 {
@@ -9,15 +10,15 @@ namespace Mobile_Core
         public SessionManager() { }
 
 
-        GameManager _gameManager;
+        GameplayManager _gameplay;
 
 
 
         private void Start()
         {
-            _gameManager = GameManager.Instance;
+            _gameplay = GameplayManager.instance;
 
-            if(_gameManager.GetData.showRatingPanel == TagManager.SHOW_RATING_PANEL_COUNTER)
+            if(_gameplay.Data.showRatingPanel == TagManager.SHOW_RATING_PANEL_COUNTER)
             {
                 // show rating panel
             }
@@ -27,11 +28,11 @@ namespace Mobile_Core
         public void LoadNextGameplayLevel()
         {
             // incase if game-manager is null
-            if (_gameManager == null)
-                _gameManager = GameManager.Instance;
+            if (_gameplay == null)
+                _gameplay = GameplayManager.instance;
 
 
-            if (_gameManager.GetData.adsPerLevelCounter == TagManager.SHOW_INTERSTITIAL_AD_COUNTER)
+            if (_gameplay.Data.adsPerLevelCounter == TagManager.SHOW_INTERSTITIAL_AD_COUNTER)
             {
                 // show intestitial ad
 
@@ -40,9 +41,9 @@ namespace Mobile_Core
 
             var data = new SaveData();
 
-            var bg = _gameManager.loadingBackground;
-            var progress = _gameManager.loadingProgressImage;
-            var txt = _gameManager.loadingTxt;
+            var bg = _gameplay.loadingBackground;
+            var progress = _gameplay.loadingProgressImage;
+            var txt = _gameplay.loadingTxt;
 
 
             SceneLoader.Instance.LoadScene(data.levelCounter.ToString(),
