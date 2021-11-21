@@ -36,15 +36,15 @@ namespace Mobile_Gameplay
             if (instance == null)
                 instance = this;
 
-            restartBtn.onClick.AddListener(() =>
-            {
-                SceneLoader.Instance.LoadScene("Test_Scene");
-            });
+            //restartBtn.onClick.AddListener(() =>
+            //{
+            //    SceneLoader.Instance.LoadScene("Test_Scene");
+            //});
 
-            quitBtn.onClick.AddListener(() =>
-            {
-                SceneLoader.Instance.LoadScene("Test");
-            });
+            //quitBtn.onClick.AddListener(() =>
+            //{
+            //    SceneLoader.Instance.LoadScene("Test");
+            //});
 
             _score = FindObjectOfType<ScoreManager>();
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Mobile_Core
 {
@@ -13,16 +14,16 @@ namespace Mobile_Core
         AsyncOperation _asyncOperation;
         float _loadingTimer = 0f;
 
-        protected SceneLoader () {}
+        protected SceneLoader() { }
 
 
-        public void LoadScene(string id)
+        public void LoadScene(string id, GameObject loadingBackground, Image loadingProgress, TMPro.TextMeshProUGUI loadingTxt)
         {
-            StartCoroutine(ILoadLevel(id));
+            StartCoroutine(ILoadLevel(id, loadingBackground, loadingProgress, loadingTxt));
         }
 
 
-        IEnumerator ILoadLevel(string id)
+        IEnumerator ILoadLevel(string id, GameObject loadingBackground, Image loadingProgress, TMPro.TextMeshProUGUI loadingTxt)
         {
             _asyncOperation = SceneManager.LoadSceneAsync(id);
 
@@ -33,9 +34,15 @@ namespace Mobile_Core
                 yield break;
             }
 
+            // show loading screen
+            loadingBackground.SetActive(true);
+
             while (!_asyncOperation.isDone)
             {
                 _loadingTimer = _asyncOperation.progress / 0.9f;
+                // show loading progress
+                loadingTxt.SetText($"loading({_loadingTimer}%)");
+                loadingProgress.fillAmount = Mathf.MoveTowards(0, _loadingTimer, _loadingTimer);
 
                 yield return null;
             }

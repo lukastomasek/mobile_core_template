@@ -1,6 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using NaughtyAttributes;
+using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// game manager should control the core system of the application
@@ -21,8 +23,16 @@ namespace Mobile_Core
 
     public class GameManager : SingeltonTemplate<GameManager>
     {
+        [Header("APPLICATION SETTINGS")]
+        [HorizontalLine(color: EColor.Pink)]
         [SerializeField] int pauseFramerate = 15;
         [SerializeField] int gameFramerate = 30;
+
+        [Header("UI/LOADING")]
+        [HorizontalLine(color: EColor.Yellow)]
+        public GameObject loadingBackground;
+        public Image loadingProgressImage;
+        public TextMeshProUGUI loadingTxt;
 
         public AppStates appState;
 
@@ -37,6 +47,18 @@ namespace Mobile_Core
             SetTargetFramerate(appState);
 
             _data = SaveManager.Load();
+
+            CheckHapticsSettings();
+          
+        }
+
+
+        void CheckHapticsSettings()
+        {
+            if(_data.enableHaptic)
+            {
+                Handheld.Vibrate();
+            }
         }
 
 

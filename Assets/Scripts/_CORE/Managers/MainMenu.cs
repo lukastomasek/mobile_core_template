@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using Mobile_UI;
+using NaughtyAttributes;
 
 namespace Mobile_Core
 {
@@ -12,7 +14,16 @@ namespace Mobile_Core
 
         public static MainMenu instance;
 
+        [HorizontalLine(color: EColor.Yellow)]
+        [Header("UI/TEXT")]
         [SerializeField] TextMeshProUGUI coinsTxt;
+
+        [Space(10)]
+        [HorizontalLine(color: EColor.Red)]
+        [Header("UI/LOADING SCREEN")]
+        [SerializeField] GameObject loadingBackground;
+        [SerializeField] Image loadingProgressImage;
+        [SerializeField] TextMeshProUGUI loadingTxt;
 
         SaveData _data = new SaveData();
 
@@ -39,6 +50,15 @@ namespace Mobile_Core
         }
 
         public SaveData GetData() => _data;
+
+
+        // test
+        public void LoadLevel()
+        {
+            SceneLoader.Instance.LoadScene("Test_Scene", loadingBackground,
+                loadingProgressImage, loadingTxt
+                );
+        }
 
 
         public void OpenPanel(GameObject panel)

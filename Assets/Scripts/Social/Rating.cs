@@ -5,6 +5,11 @@ using UnityEngine.iOS;
 
 namespace Mobile_Social
 {
+    /// <summary>
+    /// show rating panel every 5th level if chooses to prompt for later or closes the rating panel
+    /// </summary>
+
+
     public class Rating : MonoBehaviour
     {
 
