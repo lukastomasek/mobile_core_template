@@ -10,7 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 299b5558076ab40c782aeb0eaaf8d47d, type: 3}
-  m_Name: Test_Reward
+  m_Name: New
   m_EditorClassIdentifier: 
-  basicReward: 10
-  doubleReward: 0
+  type: 2
+  coins: 0
+  chest:
+  - name: 
+    prefab: {fileID: 1981131855061102, guid: 7ec354ef3daae7641b7a3fa5e1fe0c81, type: 3}
+    description: ccxbvvcxvcxvcxvcxvcxvxcvxcvxcvcxvxcvcxvcxvcxvcxvcxvcxvcxvcxvcxvcxv
+  - name: 
+    prefab: {fileID: 0}
+    description: 

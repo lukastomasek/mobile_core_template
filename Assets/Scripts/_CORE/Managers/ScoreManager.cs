@@ -4,6 +4,7 @@ using System;
 
 namespace Mobile_Core
 {
+  
 
     public class ScoreManager : MonoBehaviour
     {
@@ -14,6 +15,7 @@ namespace Mobile_Core
         public static Action OnWon;
 
         int _currentScore;
+
 
        
         private void Start()
@@ -28,7 +30,7 @@ namespace Mobile_Core
 
         public void IncreaseScore()
         {
-            _currentScore += score.basicReward;
+            //_currentScore += score.basicReward;
 
             scoreTxt.SetText(_currentScore.ToString());
 
