@@ -40,6 +40,8 @@ namespace Mobile_Core
             }
         }
 
+        [ContextMenu("Reset Wallet")]
+        public void ResetWallet() => Wallet.ResetMoney();
 
         public void LoadNextGameplayLevel()
         {

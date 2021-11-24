@@ -1,41 +1,45 @@
 using UnityEngine;
 using TMPro;
 using System;
+using Mobile_Rewards;
 
 namespace Mobile_Core
 {
-  
+
 
     public class ScoreManager : MonoBehaviour
     {
         [SerializeField] Rewards score;
-        [SerializeField] TextMeshProUGUI scoreTxt;
-        [SerializeField] TextMeshProUGUI currencyTxt;
+
 
         public static Action OnWon;
+        public static Action<int> OnUpdateScore;
+        public static Action<int> OnPlayerUIUpdate;
 
         int _currentScore;
 
 
-       
-        private void Start()
+        public void IncreaseScore(int score)
         {
-
-            Wallet.Load();
-             
-            Debug.Log(Wallet.currentAmount);
-
-            currencyTxt.SetText($"${Wallet.currentAmount}");
+            _currentScore += score;
+            Debug.Log($"<b> Current score is : {_currentScore} </b>");
         }
 
-        public void IncreaseScore()
+        public void GetDoubleReward()
         {
-            //_currentScore += score.basicReward;
+            _currentScore *= 2;
+            OnPlayerUIUpdate.Invoke(_currentScore);
+        }
 
-            scoreTxt.SetText(_currentScore.ToString());
+        public void GetBoostedReward()
+        {
+            RewardSlider booster = FindObjectOfType<RewardSlider>();
 
-            if (_currentScore >= 30)
-                OnWon?.Invoke();
+            if (booster != null)
+            {
+                _currentScore += booster.GetRewardBooster;
+                OnPlayerUIUpdate?.Invoke(_currentScore);
+            }
         }
 
 

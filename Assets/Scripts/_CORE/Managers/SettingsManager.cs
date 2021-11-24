@@ -18,8 +18,8 @@ namespace Mobile_Core
         MainMenu _main;
         SaveData _data;
 
-        public static Action<bool> changeMusicSettings;
-        public static Action<bool> changeSoundSettings;
+        //public static Action<bool> changeMusicSettings;
+        //public static Action<bool> changeSoundSettings;
 
 
         private void Start()
@@ -49,8 +49,8 @@ namespace Mobile_Core
             else
                 soundToggle.isOn = false;
 
-            changeMusicSettings(musicToggle.isOn);
-            changeSoundSettings(soundToggle.isOn);
+            //changeMusicSettings(musicToggle.isOn);
+            //changeSoundSettings(soundToggle.isOn);
 
             //Debug.Log($"music is: {_data.playMusic}");
             //Debug.Log($"sound is: {_data.playSound}");
@@ -69,8 +69,8 @@ namespace Mobile_Core
                 _data.playMusic = false;
             }
 
-            SaveManager.Save(_data);
-            changeMusicSettings(toggle.isOn);
+            //SaveManager.Save(_data);
+            //changeMusicSettings(toggle.isOn);
         }
 
         public void ToggleSoundFx(Toggle toggle)
@@ -85,8 +85,8 @@ namespace Mobile_Core
                 _data.playSound = false;
             }
 
-            SaveManager.Save(_data);
-            changeSoundSettings(toggle.isOn);
+            //SaveManager.Save(_data);
+            //changeSoundSettings(toggle.isOn);
 
         }
 
@@ -101,7 +101,7 @@ namespace Mobile_Core
                 _data.enableHaptic = false;
             }
 
-            SaveManager.Save(_data);
+            //SaveManager.Save(_data);
         }
 
 

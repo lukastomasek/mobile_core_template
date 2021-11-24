@@ -18,7 +18,7 @@ namespace Mobile_Test
         {
             if (item.CompareTag(TagManager.PLAYER))
             {
-                _score.IncreaseScore();
+                _score.IncreaseScore(5);
                 _particle.Play();
                 Destroy(gameObject, 2);
 

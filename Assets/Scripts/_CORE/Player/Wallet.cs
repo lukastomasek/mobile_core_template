@@ -23,7 +23,7 @@ namespace Mobile_Core
 
            
             // reset amount recieved after saving 
-            ammountRecieved = 0;
+            //ammountRecieved = 0;
 
         }
 
@@ -53,6 +53,9 @@ namespace Mobile_Core
         public static void ResetMoney()
         {
             currentAmount = 0;
+            SaveData data = new SaveData();
+            data.playerCurrency = 0;
+            SaveManager.Save(data);
         }
 
 

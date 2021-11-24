@@ -74,17 +74,18 @@ namespace Mobile_Core
 
         }
 
-        private void OnEnable()
-        {
-            SettingsManager.changeMusicSettings += MusicSetting;
-            SettingsManager.changeSoundSettings += SoundSettings;
-        }
+         // this needs to be fixed
+        //private void OnEnable()
+        //{
+        //    SettingsManager.changeMusicSettings += MusicSetting;
+        //    SettingsManager.changeSoundSettings += SoundSettings;
+        //}
 
-        private void OnDestroy()
-        {
-            SettingsManager.changeMusicSettings -= MusicSetting;
-            SettingsManager.changeSoundSettings -= SoundSettings;
-        }
+        //private void OnDestroy()
+        //{
+        //    SettingsManager.changeMusicSettings -= MusicSetting;
+        //    SettingsManager.changeSoundSettings -= SoundSettings;
+        //}
 
 
         public void MusicSetting(bool isMute)

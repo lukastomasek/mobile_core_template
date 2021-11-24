@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
+using Mobile_UI;
 using NaughtyAttributes;
 using Mobile_Core;
-using TMPro;
+
 
 
 namespace Mobile_Gameplay
@@ -15,14 +15,22 @@ namespace Mobile_Gameplay
         GAME_WON,
     };
 
+    public enum RewardStates
+    {
+        RANDOM_REWARD,
+        DOUBLE,
+        CHEST
+    };
+
     public class GameplayManager : MonoBehaviour
     {
         public static GameplayManager instance;
 
         [SerializeField, Header("TESTING")] GameStates gameState;
+        [SerializeField, Header("TESTING")] RewardStates rewardState;
         [SerializeField] GameObject player;
         [SerializeField] GameObject spawnManager;
-
+        [SerializeField] InterfaceManager uiManager;
 
         ScoreManager _score;
 
@@ -60,7 +68,17 @@ namespace Mobile_Gameplay
         private void Start()
         {
             gameState = GameStates.GAME_START;
+            rewardState = RewardStates.RANDOM_REWARD;
             Data = SaveManager.Load();
+        }
+
+        public void ChangeRewardStateToDouble()
+        {
+            rewardState = RewardStates.DOUBLE;
+        }
+        public void ChangeRewardStateToChest()
+        {
+            rewardState = RewardStates.CHEST;
         }
 
         public void OnGameState(GameStates state)
@@ -71,6 +89,24 @@ namespace Mobile_Gameplay
                     player.SetActive(false);
                     spawnManager.SetActive(false);
                     //uiPanel.SetActive(true);
+
+                    switch (rewardState)
+                    {
+                        case RewardStates.RANDOM_REWARD:
+                            uiManager.SetRewardPanel(true);
+                            break;
+                        case RewardStates.DOUBLE:
+                            print("double");
+                            uiManager.SetRewardPanel(false);
+                            uiManager.SetDoublePanel(true);
+                            break;
+
+                        case RewardStates.CHEST:
+                            uiManager.SetRewardPanel(false);
+                            uiManager.SetDoublePanel(false);
+                            break;
+                    }
+
                     break;
                 case GameStates.GAME_WON:
                     player.SetActive(false);
@@ -82,9 +118,6 @@ namespace Mobile_Gameplay
                     break;
             }
         }
-
-
-
 
     }
 
