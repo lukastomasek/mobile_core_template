@@ -10,99 +10,182 @@ namespace Mobile_Core
         [SerializeField] string privacyPolicyLink;
 
         [HorizontalLine(color: EColor.Red)]
-        [Header("TOGGLES")]
-        [SerializeField] Toggle musicToggle;
-        [SerializeField] Toggle soundToggle;
-        [SerializeField] Toggle hapticsToggle;
+        [Header("Icons")]
+        [SerializeField] Image musicIcon;
+        [SerializeField] Image soundIcon;
+        [SerializeField] Image hapticsIcon;
+
+        [SerializeField] Sprite musicOnSpr, musicOffSpr;
+        [SerializeField] Sprite soundOnSpr, soundOffSpr;
+        [SerializeField] Sprite hapticsOnSpr, hapticsOffSpr;
+
+        public static Action<bool> UpdateMusicState;
+        public static Action<bool> UpdateSoundState;
+        public static Action<bool> UpdateHapticsState;
+
+
+        public bool MusicState { get; private set; } = true;
+        public bool SoundState { get; private set; } = true;
+        public bool HapticState { get; private set; } = true;
+
 
         MainMenu _main;
-        SaveData _data;
-
-        //public static Action<bool> changeMusicSettings;
-        //public static Action<bool> changeSoundSettings;
 
 
         private void Start()
         {
             _main = MainMenu.instance;
-            _data = _main.GetData();
 
-            if (_data == null)
-            {
-                _data.playSound = true;
-                _data.playMusic = true;
-                _data.enableHaptic = true;
-            }
-
-            if (_data.enableHaptic == true)
-                hapticsToggle.isOn = true;
-            else
-                hapticsToggle.isOn = false;
-
-            if (_data.playMusic == true)
-                musicToggle.isOn = true;
-            else
-                musicToggle.isOn = false;
-
-            if (_data.playSound == true)
-                soundToggle.isOn = true;
-            else
-                soundToggle.isOn = false;
-
-            //changeMusicSettings(musicToggle.isOn);
-            //changeSoundSettings(soundToggle.isOn);
-
-            //Debug.Log($"music is: {_data.playMusic}");
-            //Debug.Log($"sound is: {_data.playSound}");
+            LoadSettingStates();
         }
 
 
-
-        public void ToggleMusic(Toggle toggle)
+        void LoadSettingStates()
         {
-            if (toggle.isOn)
+            var active = "#FFFFFF";
+            var deactivated = "#A4A4A4";
+
+            Color activeCol;
+            Color deactivatedCol;
+
+            if (_main.GetData() == null)
             {
-                _data.playMusic = true;
+                _main.GetData().playSound = true;
+                _main.GetData().playMusic = true;
+                _main.GetData().enableHaptic = true;
             }
             else
             {
-                _data.playMusic = false;
+                MusicState = _main.GetData().playMusic;
+                SoundState = _main.GetData().playSound;
+                HapticState = _main.GetData().enableHaptic;
+
+
+                UpdateMusicState?.Invoke(MusicState);
+                UpdateSoundState?.Invoke(SoundState);
+                UpdateHapticsState?.Invoke(HapticState);
             }
 
-            //SaveManager.Save(_data);
-            //changeMusicSettings(toggle.isOn);
+            if (_main.GetData().playMusic)
+            {
+                musicIcon.sprite = musicOnSpr;
+            }
+            else
+            {
+                musicIcon.sprite = musicOffSpr;
+            }
+
+            if (_main.GetData().playSound)
+            {
+                soundIcon.sprite = soundOnSpr;
+            }
+            else
+            {
+                soundIcon.sprite = soundOffSpr;
+            }
+            if (_main.GetData().enableHaptic)
+            {
+                if (ColorUtility.TryParseHtmlString(active, out activeCol))
+                {
+                    hapticsIcon.color = activeCol;
+                }
+            }
+            else
+            {
+                if (ColorUtility.TryParseHtmlString(deactivated, out deactivatedCol))
+                {
+                    hapticsIcon.color = deactivatedCol;
+                }
+
+            }
         }
 
-        public void ToggleSoundFx(Toggle toggle)
+
+        public void ToggleMusic()
         {
-            if (toggle.isOn)
-            {
-                _data.playSound = true;
+            MusicState = !MusicState;
 
+            if (MusicState == true)
+            {
+                musicIcon.sprite = musicOnSpr;
+                _main.GetData().playMusic = true;
+                UpdateMusicState?.Invoke(true);
             }
             else
             {
-                _data.playSound = false;
+                musicIcon.sprite = musicOffSpr;
+                _main.GetData().playMusic = false;
+                UpdateMusicState?.Invoke(false);
             }
 
-            //SaveManager.Save(_data);
-            //changeSoundSettings(toggle.isOn);
-
+            SaveManager.Save(_main.GetData());
         }
 
-        public void ToggleHaptics(Toggle toggle)
+        public void ToggleSound()
         {
-            if (toggle.isOn)
+            SoundState = !SoundState;
+
+            if (SoundState == true)
             {
-                _data.enableHaptic = true;
+                soundIcon.sprite = soundOnSpr;
+                _main.GetData().playSound = true;
+                UpdateSoundState?.Invoke(true);
             }
             else
             {
-                _data.enableHaptic = false;
+                soundIcon.sprite = soundOffSpr;
+                _main.GetData().playSound = false;
+                UpdateSoundState?.Invoke(false);
             }
 
-            //SaveManager.Save(_data);
+            SaveManager.Save(_main.GetData());
         }
+
+        public void ToggleHaptics()
+        {
+            HapticState = !HapticState;
+
+            var active = "#FFFFFF";
+            var deactivated = "#A4A4A4";
+
+            Color activeCol;
+            Color deactivatedCol;
+
+            if (HapticState == true)
+            {
+                if (ColorUtility.TryParseHtmlString(active, out activeCol))
+                {
+                    hapticsIcon.color = activeCol;
+                }
+
+                _main.GetData().enableHaptic = true;
+                UpdateHapticsState?.Invoke(true);
+            }
+            else
+            {
+                if (ColorUtility.TryParseHtmlString(deactivated, out deactivatedCol))
+                {
+                    hapticsIcon.color = deactivatedCol;
+                }
+                _main.GetData().enableHaptic = false;
+                UpdateHapticsState?.Invoke(false);
+            }
+
+            SaveManager.Save(_main.GetData());
+        }
+
+        [ContextMenu("Rest Settings")]
+        public void ResetSettings()
+        {
+            _main.GetData().playMusic = true;
+            _main.GetData().playSound = true;
+            _main.GetData().enableHaptic = true;
+
+            SaveManager.Save(_main.GetData());
+
+            Debug.Log("<b> Resseting Settings! </b>");
+        }
+
 
 
         public void OpenCreditPanel(GameObject panel)

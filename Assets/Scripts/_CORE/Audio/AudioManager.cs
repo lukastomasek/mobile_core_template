@@ -24,6 +24,7 @@ namespace Mobile_Core
         private void Awake()
         {
 
+
             _backgroundObject = new GameObject("Background Audio");
             _soundObject = new GameObject("Sound Audio");
 
@@ -35,16 +36,7 @@ namespace Mobile_Core
                 _bgAudio = _backgroundObject.AddComponent<AudioSource>();
                 _bgAudio.loop = true;
                 _bgAudio.playOnAwake = true;
-
-                if (_data != null)
-                {
-                    //_bgAudio.mute = !_data.playMusic;
-                }
-                else
-                {
-                    _bgAudio.volume = backgroundMusicVol;
-
-                }
+                _bgAudio.volume = backgroundMusicVol;
             }
 
             if (_soundObject != null)
@@ -53,15 +45,7 @@ namespace Mobile_Core
                 _soundAudio.loop = false;
                 _soundAudio.playOnAwake = false;
 
-                if (_data != null)
-                {
-                    //_soundAudio.mute = !_data.playSound;
-                }
-                else
-                {
-
-                    _soundAudio.volume = soundVol;
-                }
+                _soundAudio.volume = soundVol;
             }
 
         }
@@ -74,29 +58,32 @@ namespace Mobile_Core
 
         }
 
-         // this needs to be fixed
-        //private void OnEnable()
-        //{
-        //    SettingsManager.changeMusicSettings += MusicSetting;
-        //    SettingsManager.changeSoundSettings += SoundSettings;
-        //}
-
-        //private void OnDestroy()
-        //{
-        //    SettingsManager.changeMusicSettings -= MusicSetting;
-        //    SettingsManager.changeSoundSettings -= SoundSettings;
-        //}
-
-
-        public void MusicSetting(bool isMute)
+        private void OnEnable()
         {
-            _bgAudio.mute = !isMute;
+            SettingsManager.UpdateMusicState += MusicSetting;
+            SettingsManager.UpdateSoundState += SoundSettings;
+
         }
 
-        public void SoundSettings(bool isMute)
+        private void OnDisable()
         {
-            _soundAudio.mute = !isMute;
+            SettingsManager.UpdateMusicState -= MusicSetting;
+            SettingsManager.UpdateSoundState -= SoundSettings;
         }
+
+        void MusicSetting(bool isMute)
+        {
+            if (_bgAudio != null)
+                _bgAudio.mute = !isMute;
+        }
+
+        void SoundSettings(bool isMute)
+        {
+            if (_soundAudio != null)
+                _soundAudio.mute = !isMute;
+        }
+
+
 
 
 
