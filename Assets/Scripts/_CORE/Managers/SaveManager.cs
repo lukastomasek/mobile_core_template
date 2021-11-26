@@ -9,7 +9,7 @@ namespace Mobile_Core
         static string _directory = "/GameData/";
         static string _fileName = "MyData.txt";
 
-        static bool _fileExist = false;
+        public static bool fileExist = false;
 
 
         public static void Save(SaveData data)
@@ -18,7 +18,7 @@ namespace Mobile_Core
 
             if (!Directory.Exists(dir))
             {
-                _fileExist = true;
+                fileExist = true;
                 Directory.CreateDirectory(dir);
             }
 
@@ -42,6 +42,7 @@ namespace Mobile_Core
                 data = JsonUtility.FromJson<SaveData>(json);
 
                 Debug.Log("<color=green> LOADING </color>");
+
 
             }
             else

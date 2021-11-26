@@ -15,9 +15,14 @@ namespace Mobile_Core
         [SerializeField] Image soundIcon;
         [SerializeField] Image hapticsIcon;
 
-        [SerializeField] Sprite musicOnSpr, musicOffSpr;
-        [SerializeField] Sprite soundOnSpr, soundOffSpr;
-        [SerializeField] Sprite hapticsOnSpr, hapticsOffSpr;
+        [Header("Sprites")]
+        [HorizontalLine(color: EColor.Blue)]
+        [SerializeField] Sprite musicOnSpr;
+        [SerializeField] Sprite musicOffSpr;
+        [SerializeField] Sprite soundOnSpr;
+        [SerializeField] Sprite soundOffSpr;
+        [SerializeField] Sprite hapticsOnSpr;
+        [SerializeField] Sprite hapticsOffSpr;
 
         public static Action<bool> UpdateMusicState;
         public static Action<bool> UpdateSoundState;
@@ -48,7 +53,7 @@ namespace Mobile_Core
             Color activeCol;
             Color deactivatedCol;
 
-            if (_main.GetData() == null)
+            if (_main.GetData() == null || !SaveManager.fileExist)
             {
                 _main.GetData().playSound = true;
                 _main.GetData().playMusic = true;
