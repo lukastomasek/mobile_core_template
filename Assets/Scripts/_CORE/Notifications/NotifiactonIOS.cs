@@ -81,8 +81,9 @@ namespace Mobile_Core
 
             return notification;
         }
+        
+#endif
     }
 
-#endif
 }
 
