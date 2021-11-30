@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
 using NaughtyAttributes;
-using UnityEngine.UI;
-using TMPro;
+using Mobile_UI;
 
 /// <summary>
 /// game manager should control the core system of the application
@@ -11,124 +10,86 @@ using TMPro;
 
 namespace Mobile_Core
 {
-    public enum AppStates
+    public enum GameState
     {
-        APP_START,
-        APP_UPDATE,
-        APP_PAUSE,
-        APP_EXIT
-
-    }
-
-
-    public class GameManager : SingeltonTemplate<GameManager>
+        GAME_START,
+        VICTORY,
+        LOSE
+    };
+    public enum RewardState
     {
-        [Header("APPLICATION SETTINGS")]
-        [HorizontalLine(color: EColor.Pink)]
-        [SerializeField] int pauseFramerate = 15;
-        [SerializeField] int gameFramerate = 30;
-
-        [Header("UI/LOADING")]
-        [HorizontalLine(color: EColor.Yellow)]
-        public GameObject loadingBackground;
-        public Image loadingProgressImage;
-        public TextMeshProUGUI loadingTxt;
-
-        public AppStates appState;
+        COINS,
+        DOUBLE_COINS,
+        CHEST
+    };
 
 
-        SaveData _data = new SaveData();
+    public class GameManager : MonoBehaviour
+    {
+        public static GameManager instance;
 
-        protected GameManager() { }
+
+        public static Action<GameState> OnGameStateUpdated;
+        public static Action<int> OnUpdateScore;
+        public static Action<int> OnUpdateUI;
+
+       
+
+        public GameState State { get; set; }
+
+        [ContextMenu("Reset Wallet")]
+        public void ResetWallet()
+        {
+            Wallet.ResetMoney();
+
+        }
+
+        private void Awake()
+        {
+            if (instance == null)
+                instance = this;
+            else
+                DestroyImmediate(instance);
+        }
 
         private void Start()
         {
-            appState = AppStates.APP_UPDATE;
-            SetTargetFramerate(appState);
-
-            _data = SaveManager.Load();
-
-            CheckHapticsSettings();
-          
+            Wallet.Load();
         }
 
-
-        void CheckHapticsSettings()
+        public void UpdateGameState(GameState newState)
         {
-            if(_data.enableHaptic)
+            State = newState;
+
+            switch (newState)
             {
-                Handheld.Vibrate();
-            }
-        }
-
-
-        public SaveData GetData
-        {
-            get { return _data; }
-        }
-
-
-        void Update()
-        {
-            //testing
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                appState = AppStates.APP_PAUSE;
-            }
-            else if (Input.GetKeyUp(KeyCode.Space))
-            {
-                appState = AppStates.APP_UPDATE;
-            }
-
-            switch (appState)
-            {
-                case AppStates.APP_UPDATE:
-                    SetTargetFramerate(appState);
+                case GameState.GAME_START:
                     break;
-
-                case AppStates.APP_PAUSE:
-                    SetTargetFramerate(appState);
+                case GameState.VICTORY:
+                    HandleVictory();
                     break;
-
-                case AppStates.APP_EXIT:
+                case GameState.LOSE:
+                    HandleLose();
                     break;
-
                 default:
-                    appState = AppStates.APP_START;
-                    Time.timeScale = 1;
                     break;
             }
 
-        }
-
-        void SetTargetFramerate(AppStates state)
-        {
-            if (state == AppStates.APP_UPDATE || state == AppStates.APP_START)
-            {
-                if (Application.targetFrameRate != gameFramerate)
-                    Application.targetFrameRate = gameFramerate;
-            }
-            if (state == AppStates.APP_PAUSE)
-            {
-                if (Application.targetFrameRate != pauseFramerate)
-                    Application.targetFrameRate = pauseFramerate;
-            }
-            //Debug.Log(Application.targetFrameRate);
+            OnGameStateUpdated?.Invoke(newState);
         }
 
 
-        public void PauseGame(bool isPaused)
+        void HandleVictory()
         {
-            if (isPaused)
-            {
-                appState = AppStates.APP_PAUSE;
-                Time.timeScale = 0;
-            }
-            else
-            {
-                appState = AppStates.APP_UPDATE;
-                Time.timeScale = 1;
-            }
+            Time.timeScale = 0;
+            Debug.Log("You Won!");
+        }
+
+        void HandleLose()
+        {
+            Time.timeScale = 0;
+            Debug.Log("You Lost!");
+            
         }
     }
 

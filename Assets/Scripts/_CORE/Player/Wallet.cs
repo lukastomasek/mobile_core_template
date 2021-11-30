@@ -5,19 +5,20 @@ namespace Mobile_Core
 {
     public static class Wallet
     {
-        public static int currentAmount;
+        public static int currentAmount = 0;
         private static int ammountRecieved;
 
         public static Action<int, int> onUpdate;
 
+      
         
         public static void AddMoney(int receivingAmount)
         {
-            ammountRecieved = receivingAmount;
+            currentAmount = receivingAmount;
 
             SaveData data = new SaveData();
 
-            data.playerCurrency = currentAmount + ammountRecieved;
+            data.playerCurrency = currentAmount;
              
             SaveManager.Save(data);
 
@@ -52,9 +53,10 @@ namespace Mobile_Core
 
         public static void ResetMoney()
         {
-            currentAmount = 0;
             SaveData data = new SaveData();
-            data.playerCurrency = 0;
+            currentAmount = 0;
+            data.playerCurrency = currentAmount;
+            Debug.Log("reseting currency to" + currentAmount);
             SaveManager.Save(data);
         }
 
@@ -66,6 +68,7 @@ namespace Mobile_Core
             data = SaveManager.Load();
 
             currentAmount = data.playerCurrency;
+            Debug.Log(currentAmount);
 
         }
     }

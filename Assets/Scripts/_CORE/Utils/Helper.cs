@@ -24,6 +24,8 @@ namespace Mobile_Utilities
         {
             return new Color(Random.value, Random.value, Random.value, alpha);
         }
-       
+
+
+   
     }
 }

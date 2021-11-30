@@ -27,6 +27,9 @@ namespace Mobile_Core
 
         SaveData _data = new SaveData();
 
+
+        AppState _currentAppState;
+
         private void Awake()
         {
             if (instance == null)
@@ -36,6 +39,7 @@ namespace Mobile_Core
 
 
             _data = SaveManager.Load();
+
 
 
             if (_data != null)
@@ -49,8 +53,8 @@ namespace Mobile_Core
 
         }
 
-        public SaveData GetData() => _data;
 
+        public SaveData GetData() => _data;
 
         // test
         public void LoadLevel()
@@ -60,6 +64,16 @@ namespace Mobile_Core
             SceneLoader.Instance.LoadScene(level, loadingBackground,
                 loadingProgressImage, loadingTxt
                 );
+        }
+
+        public void PauseState()
+        {
+            AppManager.Instance.UpdateAppState(AppState.PAUSE);
+        }
+
+        public void UpdateState()
+        {
+            AppManager.Instance.UpdateAppState(AppState.UPDATE);
         }
 
 

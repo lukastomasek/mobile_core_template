@@ -5,6 +5,7 @@ namespace Mobile_Test
 {
     public class Coin : MonoBehaviour
     {
+        [SerializeField] int score = 10;
         ParticleSystem _particle;
         ScoreManager _score;
 
@@ -18,7 +19,8 @@ namespace Mobile_Test
         {
             if (item.CompareTag(TagManager.PLAYER))
             {
-                _score.IncreaseScore(5);
+                GameManager.OnUpdateScore?.Invoke(score);
+          
                 _particle.Play();
                 Destroy(gameObject, 2);
 

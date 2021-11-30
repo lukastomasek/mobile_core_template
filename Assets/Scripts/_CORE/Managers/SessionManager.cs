@@ -6,20 +6,14 @@ using UnityEngine.SceneManagement;
 namespace Mobile_Core
 {
 
-    public enum EREWARD_TYPE
-    {
-        COINS,
-        DOUBLE_COINS,
-        CHEST
-    };
-
+  
     public class SessionManager : SingeltonTemplate<SessionManager>
     {
 
         public SessionManager() { }
 
 
-        [HideInInspector] public EREWARD_TYPE rewardType;
+    
 
         GameplayManager _gameplay;
         InterfaceManager _interface;

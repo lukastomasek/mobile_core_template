@@ -164,22 +164,7 @@ namespace Mobile_Core
 
                 if (placementId == REWARED_VIDEO_ID)
                 {
-                    switch (SessionManager.Instance.rewardType)
-                    {
-                        case EREWARD_TYPE.COINS:
-                            Wallet.AddMoney(10);
-                            Wallet.onUpdate?.Invoke(Wallet.currentAmount, 10);
-                            break;
-
-                        case EREWARD_TYPE.DOUBLE_COINS:
-                            Wallet.AddMoney(20);
-                            Wallet.onUpdate?.Invoke(Wallet.currentAmount, 20);
-                            break;
-
-                        case EREWARD_TYPE.CHEST:
-                            // open chest
-                            break;
-                    }
+                   
                 }
 
             }

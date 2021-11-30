@@ -15,53 +15,77 @@ namespace Mobile_UI
         public TextMeshProUGUI loadingTxt;
 
         [Header("UI/PLAYER"), HorizontalLine(color: EColor.Blue)]
-        [SerializeField] TextMeshProUGUI playerCurrencyTxt;
+        [SerializeField] TextMeshProUGUI scoreTxt;
+        [SerializeField] TextMeshProUGUI playerScoreTxt;
         [SerializeField] CurrencyCounter currencyCounter;
 
         [Header("UI/REWARS"), HorizontalLine(color: EColor.Yellow)]
         [SerializeField] GameObject rewardBooster;
-        [SerializeField] GameObject doubleBooster;
+        [SerializeField] GameObject firtReward;
 
 
-        private void OnEnable()
+        [Header("UI/PANEL")]
+        [SerializeField] GameObject endPanel;
+
+
+        ScoreManager _score;
+
+        private void Awake()
         {
-            ScoreManager.OnPlayerUIUpdate += UpdateWallet;
+            GameManager.OnUpdateUI += UpdateScore;
+            GameManager.OnGameStateUpdated += UpdateGameState;
+            _score = FindObjectOfType<ScoreManager>();
+          
+
         }
 
-        private void OnDisable()
+        private void Start()
         {
-            ScoreManager.OnPlayerUIUpdate -= UpdateWallet;
+            playerScoreTxt.SetText($"${Wallet.currentAmount}");
         }
+
+        private void OnDestroy()
+        {
+            GameManager.OnUpdateUI -= UpdateScore;
+            GameManager.OnGameStateUpdated -= UpdateGameState;
+        }
+
+        void UpdateScore(int scoreRecieved)
+        {
+            scoreRecieved = _score.TotalScore();
+            scoreTxt.SetText($"${scoreRecieved}/ {_score.maxScore}");
+        }
+
+        public void UpdateGameState(GameState state)
+        {
+            if (state == GameState.LOSE)
+            {
+                endPanel.SetActive(true);
+            }
+            else if (state == GameState.VICTORY)
+            {
+                firtReward.SetActive(true);
+            }
+        }
+
+        public void OpenPanel(GameObject panel)
+        {
+            if (!panel.activeInHierarchy)
+            {
+                panel.SetActive(true);
+            }
+        }
+
+        public void ClosePanel(GameObject panel) => panel.SetActive(false);
 
         public void UpdateWallet(int moneyReceived)
         {
             currencyCounter.UpdateCurrencyText(Wallet.currentAmount, moneyReceived);
-            Wallet.AddMoney(moneyReceived);
+           
         }
 
-        public void SetRewardPanel(bool set)
-        {
-            if (set)
-            {
-                rewardBooster.SetActive(true);
-            }
-            else
-            {
-                rewardBooster.SetActive(false);
-            }
-        }
 
-        public void SetDoublePanel(bool set)
-        {
-            if (set)
-            {
-                doubleBooster.SetActive(true);
-            }
-            else
-            {
-                doubleBooster.SetActive(false);
-            }
-        }
+
 
     }
 

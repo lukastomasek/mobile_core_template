@@ -14,12 +14,12 @@ namespace Mobile_Core
         // DEFAULT : COINS
         // DOUBLE
 
-        public EREWARD_TYPE type;
+        public RewardState type;
 
-        [ShowIf("type", EREWARD_TYPE.COINS)]
+        [ShowIf("type", RewardState.COINS)]
         public int coins;
 
-        [ShowIf("type", EREWARD_TYPE.CHEST)]
+        [ShowIf("type", RewardState.CHEST)]
         public List<Chest> chest = new List<Chest>();
 
 
