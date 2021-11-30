@@ -23,8 +23,12 @@ namespace Mobile_UI
         [SerializeField] GameObject rewardBooster;
         [SerializeField] GameObject firtReward;
 
+        [Header("UI/BUTTONS"), HorizontalLine(color: EColor.Violet)]
+        [SerializeField] Button openOptionsBtn;
+        [SerializeField] Button closeOptionsBtn;
+        [SerializeField] Button mainMenuBtn;
 
-        [Header("UI/PANEL")]
+        [Header("UI/PANEL"), HorizontalLine(color:EColor.Red)]
         [SerializeField] GameObject endPanel;
 
 
@@ -42,6 +46,11 @@ namespace Mobile_UI
         private void Start()
         {
             playerScoreTxt.SetText($"${Wallet.currentAmount}");
+
+            // handle application states
+            openOptionsBtn.onClick.AddListener(() => AppManager.Instance.UpdateAppState(AppState.PAUSE));
+            closeOptionsBtn.onClick.AddListener(() => AppManager.Instance.UpdateAppState(AppState.UPDATE));
+            mainMenuBtn.onClick.AddListener(() => SessionManager.Instance.GoBackToMainMenu());
         }
 
         private void OnDestroy()

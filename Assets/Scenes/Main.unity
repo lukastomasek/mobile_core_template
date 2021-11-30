@@ -2244,7 +2244,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &861127266
 GameObject:
@@ -2831,8 +2831,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10c5322a9f4b4441a11b75aa94e098a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusicVol: 0.349
-  soundVol: 0.774
   audioSo: {fileID: 11400000, guid: e5494a3329d574469b0f3eaea164ab01, type: 2}
 --- !u!1 &1256611103
 GameObject:
@@ -3909,12 +3907,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1587310200}
         m_TargetAssemblyTypeName: Mobile_Core.MainMenu, Project.Core
-        m_MethodName: ModalMessage
-        m_Mode: 1
+        m_MethodName: AddMoney
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 15
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3969,49 +3967,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695253071}
   m_CullTransparentMesh: 1
---- !u!1 &1705098950
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1705098951}
-  - component: {fileID: 1705098952}
-  m_Layer: 0
-  m_Name: GAME MANAGER
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1705098951
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1705098950}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1705098952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1705098950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 448e18ae9d5bc4e1183d27c1022574d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1742698496
 GameObject:
   m_ObjectHideFlags: 0
@@ -4695,7 +4650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 354933839586493978, guid: 24912519578f949119f3f41e462b46bb, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 354933839586493978, guid: 24912519578f949119f3f41e462b46bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5259,7 +5214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3123428255155089943, guid: b919280a841514fa5ab095bda2f3bb50, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3123428255155089943, guid: b919280a841514fa5ab095bda2f3bb50, type: 3}
       propertyPath: m_LocalPosition.x

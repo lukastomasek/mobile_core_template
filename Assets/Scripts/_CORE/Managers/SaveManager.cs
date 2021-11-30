@@ -26,7 +26,7 @@ namespace Mobile_Core
 
             File.WriteAllText(dir + _fileName, json);
 
-            Debug.Log("<color=green> SAVING </color>");
+            //Debug.Log("<color=green> SAVING </color>");
         }
 
         public static SaveData Load()
@@ -41,7 +41,7 @@ namespace Mobile_Core
 
                 data = JsonUtility.FromJson<SaveData>(json);
 
-                Debug.Log("<color=green> LOADING </color>");
+                //Debug.Log("<color=green> LOADING </color>");
 
 
             }

@@ -22,10 +22,6 @@ namespace Mobile_Core
 
         public static Action<AppState> OnAppStateUpdated;
 
-        private void Start()
-        {
-            UpdateAppState(AppState.UPDATE);
-        }
 
         public void UpdateAppState(AppState newState)
         {
@@ -52,13 +48,13 @@ namespace Mobile_Core
         void HandleAppUpdate()
         {
             Application.targetFrameRate = targetFramerate;
-            Time.timeScale = 1;
+          
         }
 
         void HandleAppPause()
         {
             Application.targetFrameRate = pauseFramerate;
-            Time.timeScale = 0;
+            
         }
 
     }

@@ -336,6 +336,7 @@ Transform:
   - {fileID: 1103157943}
   - {fileID: 2113627573}
   - {fileID: 1090738006}
+  - {fileID: 221453671}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -522,7 +523,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 122675660}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 221453670}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &122675660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,6 +640,49 @@ Transform:
   m_Father: {fileID: 1241441537}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &221453670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 221453671}
+  - component: {fileID: 221453672}
+  m_Layer: 0
+  m_Name: Level Loader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &221453671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221453670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 81727795}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &221453672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 221453670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8217a670402d641e4b06d608165e5ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &347186763
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,6 +1336,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7877621566492497370, guid: 4fededca1c44d4072a50daa8d101837b, type: 3}
   m_PrefabInstance: {fileID: 694759529}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &694759535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7877621565639334631, guid: 4fededca1c44d4072a50daa8d101837b, type: 3}
+  m_PrefabInstance: {fileID: 694759529}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &751064799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1811,7 +1878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1090738006
 Transform:
   m_ObjectHideFlags: 0
@@ -1844,7 +1911,7 @@ MonoBehaviour:
   hapticsIcon: {fileID: 694759530}
   musicOnSpr: {fileID: 21300000, guid: 869b5bd428e8749a7b94371b21905c37, type: 3}
   musicOffSpr: {fileID: 21300000, guid: 28ea8dbcd26024858b917c25475eeab8, type: 3}
-  soundOnSpr: {fileID: 21300000, guid: 9fcf343d5164642e182490f65fded0a4, type: 3}
+  soundOnSpr: {fileID: 21300000, guid: 6674f4846920c49ceaf858010954bf95, type: 3}
   soundOffSpr: {fileID: 21300000, guid: 8794d242ee1f043908146cc09f81566e, type: 3}
   hapticsOnSpr: {fileID: 0}
   hapticsOffSpr: {fileID: 0}
@@ -1891,8 +1958,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10c5322a9f4b4441a11b75aa94e098a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundMusicVol: 0
-  soundVol: 0
   audioSo: {fileID: 11400000, guid: e5494a3329d574469b0f3eaea164ab01, type: 2}
 --- !u!1 &1177605992
 GameObject:
@@ -1976,7 +2041,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1177605995}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 221453672}
+        m_TargetAssemblyTypeName: Mobile_Core.SceneLoader, Project.Core
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1177605995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2428,6 +2505,9 @@ MonoBehaviour:
   currencyCounter: {fileID: 781992830}
   rewardBooster: {fileID: 1599613470}
   firtReward: {fileID: 1653428049}
+  openOptionsBtn: {fileID: 1640126156}
+  closeOptionsBtn: {fileID: 694759535}
+  mainMenuBtn: {fileID: 122675659}
   endPanel: {fileID: 424976843}
 --- !u!4 &1418133287
 Transform:

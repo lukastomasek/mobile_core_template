@@ -34,13 +34,12 @@ namespace Mobile_Core
         public bool HapticState { get; private set; } = true;
 
 
-        MainMenu _main;
+        SaveData _data = new SaveData();
 
 
         private void Start()
         {
-            _main = MainMenu.instance;
-
+            
             LoadSettingStates();
         }
 
@@ -53,17 +52,17 @@ namespace Mobile_Core
             Color activeCol;
             Color deactivatedCol;
 
-            if (_main.GetData() == null || !SaveManager.fileExist)
+            if (_data == null || !SaveManager.fileExist)
             {
-                _main.GetData().playSound = true;
-                _main.GetData().playMusic = true;
-                _main.GetData().enableHaptic = true;
+                _data.playSound = true;
+                _data.playMusic = true;
+                _data.enableHaptic = true;
             }
             else
             {
-                MusicState = _main.GetData().playMusic;
-                SoundState = _main.GetData().playSound;
-                HapticState = _main.GetData().enableHaptic;
+                MusicState = _data.playMusic;
+                SoundState = _data.playSound;
+                HapticState = _data.enableHaptic;
 
 
                 UpdateMusicState?.Invoke(MusicState);
@@ -71,7 +70,7 @@ namespace Mobile_Core
                 UpdateHapticsState?.Invoke(HapticState);
             }
 
-            if (_main.GetData().playMusic)
+            if (_data.playMusic)
             {
                 musicIcon.sprite = musicOnSpr;
             }
@@ -80,7 +79,7 @@ namespace Mobile_Core
                 musicIcon.sprite = musicOffSpr;
             }
 
-            if (_main.GetData().playSound)
+            if (_data.playSound)
             {
                 soundIcon.sprite = soundOnSpr;
             }
@@ -88,7 +87,7 @@ namespace Mobile_Core
             {
                 soundIcon.sprite = soundOffSpr;
             }
-            if (_main.GetData().enableHaptic)
+            if (_data.enableHaptic)
             {
                 if (ColorUtility.TryParseHtmlString(active, out activeCol))
                 {
@@ -113,17 +112,17 @@ namespace Mobile_Core
             if (MusicState == true)
             {
                 musicIcon.sprite = musicOnSpr;
-                _main.GetData().playMusic = true;
+                _data.playMusic = true;
                 UpdateMusicState?.Invoke(true);
             }
             else
             {
                 musicIcon.sprite = musicOffSpr;
-                _main.GetData().playMusic = false;
+                _data.playMusic = false;
                 UpdateMusicState?.Invoke(false);
             }
 
-            SaveManager.Save(_main.GetData());
+            SaveManager.Save(_data);
         }
 
         public void ToggleSound()
@@ -133,17 +132,17 @@ namespace Mobile_Core
             if (SoundState == true)
             {
                 soundIcon.sprite = soundOnSpr;
-                _main.GetData().playSound = true;
+                _data.playSound = true;
                 UpdateSoundState?.Invoke(true);
             }
             else
             {
                 soundIcon.sprite = soundOffSpr;
-                _main.GetData().playSound = false;
+                _data.playSound = false;
                 UpdateSoundState?.Invoke(false);
             }
 
-            SaveManager.Save(_main.GetData());
+            SaveManager.Save(_data);
         }
 
         public void ToggleHaptics()
@@ -163,7 +162,7 @@ namespace Mobile_Core
                     hapticsIcon.color = activeCol;
                 }
 
-                _main.GetData().enableHaptic = true;
+                _data.enableHaptic = true;
                 UpdateHapticsState?.Invoke(true);
             }
             else
@@ -172,21 +171,21 @@ namespace Mobile_Core
                 {
                     hapticsIcon.color = deactivatedCol;
                 }
-                _main.GetData().enableHaptic = false;
+                _data.enableHaptic = false;
                 UpdateHapticsState?.Invoke(false);
             }
 
-            SaveManager.Save(_main.GetData());
+            SaveManager.Save(_data);
         }
 
         [ContextMenu("Rest Settings")]
         public void ResetSettings()
         {
-            _main.GetData().playMusic = true;
-            _main.GetData().playSound = true;
-            _main.GetData().enableHaptic = true;
+            _data.playMusic = true;
+            _data.playSound = true;
+            _data.enableHaptic = true;
 
-            SaveManager.Save(_main.GetData());
+            SaveManager.Save(_data);
 
             Debug.Log("<b> Resseting Settings! </b>");
         }

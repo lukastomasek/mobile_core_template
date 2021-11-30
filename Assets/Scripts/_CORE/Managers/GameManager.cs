@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using NaughtyAttributes;
-using Mobile_UI;
+
 
 /// <summary>
 /// game manager should control the core system of the application
@@ -33,7 +33,7 @@ namespace Mobile_Core
         public static Action<int> OnUpdateScore;
         public static Action<int> OnUpdateUI;
 
-       
+
 
         public GameState State { get; set; }
 
@@ -55,6 +55,28 @@ namespace Mobile_Core
         private void Start()
         {
             Wallet.Load();
+
+            AppManager.OnAppStateUpdated += HandleAppSate;
+
+            // initialize the first state of app
+            AppManager.Instance.UpdateAppState(AppState.UPDATE);
+        }
+
+        private void OnDestroy()
+        {
+            AppManager.OnAppStateUpdated -= HandleAppSate;
+        }
+
+        void HandleAppSate(AppState state)
+        {
+            if (state == AppState.PAUSE)
+            {
+                Time.timeScale = 0;
+            }
+            else if (state == AppState.UPDATE)
+            {
+                Time.timeScale = 1;
+            }
         }
 
         public void UpdateGameState(GameState newState)
@@ -81,15 +103,15 @@ namespace Mobile_Core
 
         void HandleVictory()
         {
-            Time.timeScale = 0;
+            AppManager.Instance.UpdateAppState(AppState.PAUSE);
             Debug.Log("You Won!");
         }
 
         void HandleLose()
         {
-            Time.timeScale = 0;
+            AppManager.Instance.UpdateAppState(AppState.PAUSE);
             Debug.Log("You Lost!");
-            
+
         }
     }
 

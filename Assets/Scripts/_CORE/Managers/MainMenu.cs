@@ -6,9 +6,7 @@ using NaughtyAttributes;
 
 namespace Mobile_Core
 {
-    /// <summary>
-    /// logic of main menu : open/close UI tabs, show progress, load next scenes
-    /// </summary>
+
     public class MainMenu : MonoBehaviour
     {
 
@@ -53,6 +51,15 @@ namespace Mobile_Core
 
         }
 
+        private void Start()
+        {
+            AppManager.Instance.UpdateAppState(AppState.UPDATE);
+
+            // load wallet
+            Wallet.Load();
+            Debug.Log("current amount in player's save file is:" + _data.playerCurrency);
+        }
+
 
         public SaveData GetData() => _data;
 
@@ -90,6 +97,8 @@ namespace Mobile_Core
         {
             ModalWindow.instance.ShowModal("CANNOT ADD MONEY", "Error Adding Money, please try again later!");
         }
+
+        public void AddMoney(int amount) => Wallet.AddMoney(amount);
 
     }
 

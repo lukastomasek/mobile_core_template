@@ -22,6 +22,11 @@ namespace Mobile_Core
             StartCoroutine(ILoadLevel(id, loadingBackground, loadingProgress, loadingTxt));
         }
 
+        public void RestartLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
 
         IEnumerator ILoadLevel(int id, GameObject loadingBackground, Image loadingProgress, TMPro.TextMeshProUGUI loadingTxt)
         {

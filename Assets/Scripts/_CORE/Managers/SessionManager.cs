@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 namespace Mobile_Core
 {
 
-  
+
     public class SessionManager : SingeltonTemplate<SessionManager>
     {
 
         public SessionManager() { }
 
 
-    
+
 
         GameplayManager _gameplay;
         InterfaceManager _interface;
@@ -24,13 +24,13 @@ namespace Mobile_Core
             if (SceneManager.GetActiveScene().buildIndex != 0)
             {
 
-                _gameplay = GameplayManager.instance;
+                //_gameplay = GameplayManager.instance;
                 _interface = FindObjectOfType<InterfaceManager>();
 
-                if (_gameplay.Data.showRatingPanel == TagManager.SHOW_RATING_PANEL_COUNTER)
-                {
-                    // show rating panel
-                }
+                //if (_gameplay.Data.showRatingPanel == TagManager.SHOW_RATING_PANEL_COUNTER)
+                //{
+                //    // show rating panel
+                //}
             }
         }
 
@@ -40,18 +40,18 @@ namespace Mobile_Core
         public void LoadNextGameplayLevel()
         {
             // incase if game-manager is null
-            if (_gameplay == null)
-                _gameplay = GameplayManager.instance;
+            //if (_gameplay == null)
+            //    _gameplay = GameplayManager.instance;
 
             if (_interface == null)
                 _interface = FindObjectOfType<InterfaceManager>();
 
-            if (_gameplay.Data.adsPerLevelCounter == TagManager.SHOW_INTERSTITIAL_AD_COUNTER)
-            {
-                // show intestitial ad
+            //if (_gameplay.Data.adsPerLevelCounter == TagManager.SHOW_INTERSTITIAL_AD_COUNTER)
+            //{
+            //    // show intestitial ad
 
 
-            }
+            //}
 
             var data = new SaveData();
 
@@ -67,8 +67,19 @@ namespace Mobile_Core
 
         }
 
+        public void GoBackToMainMenu()
+        {
+            if (_interface == null)
+                _interface = FindObjectOfType<InterfaceManager>();
+
+           
+            var bg = _interface.loadingBackground;
+            var progress = _interface.loadingProgressImage;
+            var txt = _interface.loadingTxt;
 
 
+            SceneLoader.Instance.LoadScene(0, bg, progress, txt);
+        }
 
 
     }

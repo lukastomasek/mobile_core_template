@@ -10,8 +10,8 @@ namespace Mobile_Core
 
         public static Action<int, int> onUpdate;
 
-      
-        
+
+
         public static void AddMoney(int receivingAmount)
         {
             currentAmount = receivingAmount;
@@ -19,10 +19,10 @@ namespace Mobile_Core
             SaveData data = new SaveData();
 
             data.playerCurrency = currentAmount;
-             
+
             SaveManager.Save(data);
 
-           
+
             // reset amount recieved after saving 
             //ammountRecieved = 0;
 
@@ -68,7 +68,7 @@ namespace Mobile_Core
             data = SaveManager.Load();
 
             currentAmount = data.playerCurrency;
-            Debug.Log(currentAmount);
+            Debug.Log("current amounnt in the wallet is:" + currentAmount);
 
         }
     }
