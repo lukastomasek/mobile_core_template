@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using NaughtyAttributes;
 using Mobile_Core;
+using System;
 
 namespace Mobile_UI
 {
@@ -16,7 +17,7 @@ namespace Mobile_UI
 
         [Header("UI/PLAYER"), HorizontalLine(color: EColor.Blue)]
         [SerializeField] TextMeshProUGUI scoreTxt;
-        [SerializeField] TextMeshProUGUI playerScoreTxt;
+        [SerializeField] TextMeshProUGUI walletTxt;
         [SerializeField] CurrencyCounter currencyCounter;
 
         [Header("UI/REWARS"), HorizontalLine(color: EColor.Yellow)]
@@ -28,24 +29,23 @@ namespace Mobile_UI
         [SerializeField] Button closeOptionsBtn;
         [SerializeField] Button mainMenuBtn;
 
-        [Header("UI/PANEL"), HorizontalLine(color:EColor.Red)]
+        [Header("UI/PANEL"), HorizontalLine(color: EColor.Red)]
         [SerializeField] GameObject endPanel;
 
 
-        ScoreManager _score;
+        public static Action<int> OnUpdatePlayerUI;
+
 
         private void Awake()
         {
-            GameManager.OnUpdateUI += UpdateScore;
+            OnUpdatePlayerUI += AddMoneyToWallet;
             GameManager.OnGameStateUpdated += UpdateGameState;
-            _score = FindObjectOfType<ScoreManager>();
-          
 
         }
 
         private void Start()
         {
-            playerScoreTxt.SetText($"${Wallet.currentAmount}");
+            walletTxt.SetText($"${Wallet.currentAmount}");
 
             // handle application states
             openOptionsBtn.onClick.AddListener(() => AppManager.Instance.UpdateAppState(AppState.PAUSE));
@@ -55,15 +55,11 @@ namespace Mobile_UI
 
         private void OnDestroy()
         {
-            GameManager.OnUpdateUI -= UpdateScore;
+            OnUpdatePlayerUI -= AddMoneyToWallet;
             GameManager.OnGameStateUpdated -= UpdateGameState;
         }
 
-        void UpdateScore(int scoreRecieved)
-        {
-            scoreRecieved = _score.TotalScore();
-            scoreTxt.SetText($"${scoreRecieved}/ {_score.maxScore}");
-        }
+
 
         public void UpdateGameState(GameState state)
         {
@@ -87,10 +83,21 @@ namespace Mobile_UI
 
         public void ClosePanel(GameObject panel) => panel.SetActive(false);
 
-        public void UpdateWallet(int moneyReceived)
+
+
+        void AddMoneyToWallet(int money)
         {
-            currencyCounter.UpdateCurrencyText(Wallet.currentAmount, moneyReceived);
-           
+            Debug.Log("passing to wallet" + money);
+
+            //walletTxt.SetText($"${Wallet.currentAmount}");
+
+            int oldAmount = Wallet.currentAmountBeforeUpdating;
+            int newAmount = Wallet.currentAmount;
+
+            currencyCounter.UpdateCurrencyText(oldAmount, newAmount);
+
+            // update the old amount to keep track
+            Wallet.currentAmountBeforeUpdating = Wallet.currentAmount;
         }
 
 

@@ -6,7 +6,7 @@ namespace Mobile_Core
     public static class Wallet
     {
         public static int currentAmount = 0;
-        private static int ammountRecieved;
+        public static int currentAmountBeforeUpdating = 0;
 
         public static Action<int, int> onUpdate;
 
@@ -14,7 +14,7 @@ namespace Mobile_Core
 
         public static void AddMoney(int receivingAmount)
         {
-            currentAmount = receivingAmount;
+            currentAmount += receivingAmount;
 
             SaveData data = new SaveData();
 

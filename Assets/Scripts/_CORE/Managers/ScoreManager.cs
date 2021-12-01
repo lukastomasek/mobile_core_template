@@ -1,6 +1,4 @@
 using UnityEngine;
-using TMPro;
-using System;
 using Mobile_Rewards;
 using Mobile_UI;
 
@@ -12,14 +10,14 @@ namespace Mobile_Core
     {
         [SerializeField] Rewards score;
         public int maxScore = 60;
-        InterfaceManager _uiManager;
 
-        int _currentScore;
+
+        int _currentScore = 0;
 
         private void Awake()
         {
             GameManager.OnUpdateScore += IncreaseScore;
-            _uiManager = FindObjectOfType<InterfaceManager>();
+
         }
 
         private void OnDestroy()
@@ -31,8 +29,6 @@ namespace Mobile_Core
         void IncreaseScore(int score)
         {
             _currentScore += score;
-            Debug.Log($"<b> Current score is : {_currentScore} </b>");
-            GameManager.OnUpdateUI?.Invoke(score);
 
             if (_currentScore == maxScore)
             {
@@ -41,18 +37,20 @@ namespace Mobile_Core
         }
 
 
-        public void GetScore()
+        public void GetStandardReward()
         {
             Wallet.AddMoney(_currentScore);
-
-            _uiManager.UpdateWallet(_currentScore);
+            print($"<color=orange> adding money to wallet: ${_currentScore} </color>");
+            InterfaceManager.OnUpdatePlayerUI?.Invoke(_currentScore);
         }
 
         public void GetDoubleReward()
         {
             _currentScore *= 2;
+
             Wallet.AddMoney(_currentScore);
-            _uiManager.UpdateWallet(_currentScore);
+            print($"<color=orange> adding money to wallet: ${_currentScore} </color>");
+            InterfaceManager.OnUpdatePlayerUI?.Invoke(_currentScore);
         }
 
         public void GetBoostedReward()

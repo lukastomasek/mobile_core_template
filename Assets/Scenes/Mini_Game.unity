@@ -2501,7 +2501,7 @@ MonoBehaviour:
   loadingProgressImage: {fileID: 1243645049}
   loadingTxt: {fileID: 1243645048}
   scoreTxt: {fileID: 2093194928}
-  playerScoreTxt: {fileID: 50867653}
+  walletTxt: {fileID: 50867653}
   currencyCounter: {fileID: 781992830}
   rewardBooster: {fileID: 1599613470}
   firtReward: {fileID: 1653428049}
@@ -3842,7 +3842,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 60833708}
         m_TargetAssemblyTypeName: Mobile_Core.ScoreManager, Project.Core
-        m_MethodName: GetScore
+        m_MethodName: GetStandardReward
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -41,10 +41,10 @@ namespace Mobile_UI
 
         IEnumerator IUpdate(int current, int amount)
         {
-            int max = current + amount;
+            //int max = current + amount;
 
 
-            while (current != max)
+            while (current != amount)
             {
                 current += 1;
 

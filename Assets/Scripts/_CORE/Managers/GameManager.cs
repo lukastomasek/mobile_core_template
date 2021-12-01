@@ -56,6 +56,9 @@ namespace Mobile_Core
         {
             Wallet.Load();
 
+            // keep the initial value in the wallet
+            Wallet.currentAmountBeforeUpdating = Wallet.currentAmount;
+
             AppManager.OnAppStateUpdated += HandleAppSate;
 
             // initialize the first state of app

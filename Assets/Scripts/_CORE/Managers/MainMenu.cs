@@ -28,6 +28,9 @@ namespace Mobile_Core
 
         AppState _currentAppState;
 
+        [ContextMenu("Reset Wallet")]
+        public void ResetWallet() => Wallet.ResetMoney();
+
         private void Awake()
         {
             if (instance == null)
