@@ -53,12 +53,12 @@ namespace Mobile_Rewards
             {
 
                 slider.transform.Rotate(new Vector3(slider.transform.rotation.x, slider.transform.rotation.y,
-                      slider.transform.rotation.z + rotatingSpeed * Time.deltaTime));
+                      slider.transform.rotation.z + rotatingSpeed * Time.unscaledDeltaTime));
             }
             else
             {
                 
-                slider.transform.Translate(Vector3.left * movingSpeed * Time.deltaTime);
+                slider.transform.Translate(Vector3.left * movingSpeed * Time.unscaledDeltaTime);
             }
         }
     }

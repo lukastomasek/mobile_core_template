@@ -1,5 +1,6 @@
 using UnityEngine;
 using NaughtyAttributes;
+using Mobile_Core;
 
 namespace Mobile_Test
 {
@@ -19,16 +20,35 @@ namespace Mobile_Test
         float _randTimer = 0f;
         int _percantage = 0;
         bool _isPercentage = false;
+        bool _canSpawn = true;
 
         private void Awake()
         {
             RandomizeSpawnTimer();
 
+            GameManager.OnGameStateUpdated += handleGameState;
+
         }
+
+        private void OnDestroy()
+        {
+            GameManager.OnGameStateUpdated -= handleGameState;
+        }
+
+        void handleGameState(GameState state)
+        {
+            if (state == GameState.LOSE || state == GameState.VICTORY)
+            {
+                // stop spawning
+                _canSpawn = false;
+            }
+        }
+
 
         private void Update()
         {
-
+            if (!_canSpawn)
+                return;
 
             _currentTimer += Time.deltaTime;
             //Debug.Log($"timer is : {_currentTimer}");
@@ -61,7 +81,7 @@ namespace Mobile_Test
 
                 }
                 else if (_percantage >= 50)
-                {        
+                {
 
                     float randomXPos = Random.Range(minX, maxX);
                     GameObject obstacle = Instantiate(obstaclePrefabs, new Vector3(randomXPos, 3, -5), Quaternion.identity);

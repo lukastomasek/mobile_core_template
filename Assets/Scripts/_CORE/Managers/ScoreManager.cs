@@ -59,8 +59,13 @@ namespace Mobile_Core
 
             if (booster != null)
             {
-                _currentScore += booster.GetRewardBooster;
-                //GameManager.OnUpdateUI?.Invoke(_currentScore);
+                _currentScore *= booster.GetRewardBooster;
+
+                Debug.Log("booster reward is: " + _currentScore);
+
+                Wallet.AddMoney(_currentScore);
+
+                InterfaceManager.OnUpdatePlayerUI?.Invoke(_currentScore);
 
             }
         }

@@ -2508,6 +2508,8 @@ MonoBehaviour:
   openOptionsBtn: {fileID: 1640126156}
   closeOptionsBtn: {fileID: 694759535}
   mainMenuBtn: {fileID: 122675659}
+  standardRewardBtn: {fileID: 1955628560}
+  doubleRewardBtn: {fileID: 1629887510}
   endPanel: {fileID: 424976843}
 --- !u!4 &1418133287
 Transform:
@@ -3047,7 +3049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 930488987874968835, guid: 0aed5f6f4a5524b00a02fc9b9647a163, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 930488987874968835, guid: 0aed5f6f4a5524b00a02fc9b9647a163, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -3068,7 +3070,7 @@ PrefabInstance:
     - target: {fileID: 930488987874968835, guid: 0aed5f6f4a5524b00a02fc9b9647a163, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1103157944}
+      objectReference: {fileID: 60833708}
     - target: {fileID: 930488987874968835, guid: 0aed5f6f4a5524b00a02fc9b9647a163, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -3091,7 +3093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 930488987874968835, guid: 0aed5f6f4a5524b00a02fc9b9647a163, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: PlayButtonSound
+      value: GetBoostedReward
       objectReference: {fileID: 0}
     - target: {fileID: 930488987874968835, guid: 0aed5f6f4a5524b00a02fc9b9647a163, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
@@ -3103,7 +3105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 930488987874968835, guid: 0aed5f6f4a5524b00a02fc9b9647a163, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Mobile_Core.AudioManager, Project.Core
+      value: Mobile_Core.ScoreManager, Project.Core
       objectReference: {fileID: 0}
     - target: {fileID: 930488987874968835, guid: 0aed5f6f4a5524b00a02fc9b9647a163, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
@@ -3353,6 +3355,10 @@ PrefabInstance:
       propertyPath: rotatingSpeed
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 1976594431747810548, guid: 0aed5f6f4a5524b00a02fc9b9647a163, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aed5f6f4a5524b00a02fc9b9647a163, type: 3}
 --- !u!224 &1599613469 stripped
@@ -3401,7 +3407,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 75}
+  m_AnchoredPosition: {x: 0, y: -13}
   m_SizeDelta: {x: 500, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1629887510
@@ -3451,6 +3457,18 @@ MonoBehaviour:
       - m_Target: {fileID: 60833708}
         m_TargetAssemblyTypeName: Mobile_Core.ScoreManager, Project.Core
         m_MethodName: GetDoubleReward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1103157944}
+        m_TargetAssemblyTypeName: Mobile_Core.AudioManager, Project.Core
+        m_MethodName: PlayButtonSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3652,7 +3670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1653428050}
   m_Layer: 0
-  m_Name: First Reward
+  m_Name: Standard Reward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3843,6 +3861,18 @@ MonoBehaviour:
       - m_Target: {fileID: 60833708}
         m_TargetAssemblyTypeName: Mobile_Core.ScoreManager, Project.Core
         m_MethodName: GetStandardReward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1103157944}
+        m_TargetAssemblyTypeName: Mobile_Core.AudioManager, Project.Core
+        m_MethodName: PlayButtonSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

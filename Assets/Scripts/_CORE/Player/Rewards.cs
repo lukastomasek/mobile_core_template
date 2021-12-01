@@ -16,10 +16,10 @@ namespace Mobile_Core
 
         public RewardState type;
 
-        [ShowIf("type", RewardState.COINS)]
+        [ShowIf("type", RewardState.STANDARD)]
         public int coins;
 
-        [ShowIf("type", RewardState.CHEST)]
+        [ShowIf("type", RewardState.GIFT)]
         public List<Chest> chest = new List<Chest>();
 
 

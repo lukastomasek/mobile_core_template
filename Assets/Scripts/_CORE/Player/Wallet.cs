@@ -56,7 +56,7 @@ namespace Mobile_Core
             SaveData data = new SaveData();
             currentAmount = 0;
             data.playerCurrency = currentAmount;
-            Debug.Log("reseting currency to" + currentAmount);
+            Debug.Log("<b>reseting currency to: </b>" + currentAmount);
             SaveManager.Save(data);
         }
 
@@ -68,7 +68,7 @@ namespace Mobile_Core
             data = SaveManager.Load();
 
             currentAmount = data.playerCurrency;
-            Debug.Log("current amounnt in the wallet is:" + currentAmount);
+            Debug.Log("<b>current amounnt in the wallet is: </b>" + currentAmount);
 
         }
     }

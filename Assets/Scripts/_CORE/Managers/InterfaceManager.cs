@@ -28,6 +28,8 @@ namespace Mobile_UI
         [SerializeField] Button openOptionsBtn;
         [SerializeField] Button closeOptionsBtn;
         [SerializeField] Button mainMenuBtn;
+        [SerializeField] Button standardRewardBtn;
+        [SerializeField] Button doubleRewardBtn;
 
         [Header("UI/PANEL"), HorizontalLine(color: EColor.Red)]
         [SerializeField] GameObject endPanel;
@@ -40,6 +42,7 @@ namespace Mobile_UI
         {
             OnUpdatePlayerUI += AddMoneyToWallet;
             GameManager.OnGameStateUpdated += UpdateGameState;
+            GameManager.OnRewardsChanged += HandleRewards;
 
         }
 
@@ -47,19 +50,45 @@ namespace Mobile_UI
         {
             walletTxt.SetText($"${Wallet.currentAmount}");
 
-            // handle application states
-            openOptionsBtn.onClick.AddListener(() => AppManager.Instance.UpdateAppState(AppState.PAUSE));
-            closeOptionsBtn.onClick.AddListener(() => AppManager.Instance.UpdateAppState(AppState.UPDATE));
-            mainMenuBtn.onClick.AddListener(() => SessionManager.Instance.GoBackToMainMenu());
+            HandleButtonClicks();
         }
+
+
 
         private void OnDestroy()
         {
             OnUpdatePlayerUI -= AddMoneyToWallet;
             GameManager.OnGameStateUpdated -= UpdateGameState;
+            GameManager.OnRewardsChanged -= HandleRewards;
+        }
+
+        void HandleButtonClicks()
+        {
+            // handle application states
+            openOptionsBtn.onClick.AddListener(() => AppManager.Instance.UpdateAppState(AppState.PAUSE));
+            closeOptionsBtn.onClick.AddListener(() => AppManager.Instance.UpdateAppState(AppState.UPDATE));
+            mainMenuBtn.onClick.AddListener(() => SessionManager.Instance.GoBackToMainMenu());
+
+
+            // handle reward states
+            standardRewardBtn.onClick.AddListener(() => GameManager.instance.UpdateRewardState(RewardState.BOOSTER));
+            doubleRewardBtn.onClick.AddListener(() => GameManager.instance.UpdateRewardState(RewardState.BOOSTER));
+
         }
 
 
+        void HandleRewards(RewardState state)
+        {
+            if(state == RewardState.BOOSTER)
+            {
+                firtReward.SetActive(false);
+                rewardBooster.SetActive(true);
+            }
+            if(state == RewardState.GIFT)
+            {
+                // do other logic here 
+            }
+        }
 
         public void UpdateGameState(GameState state)
         {

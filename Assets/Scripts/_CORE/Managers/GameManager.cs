@@ -3,11 +3,6 @@ using UnityEngine;
 using NaughtyAttributes;
 
 
-/// <summary>
-/// game manager should control the core system of the application
-/// </summary>
-///
-
 namespace Mobile_Core
 {
     public enum GameState
@@ -18,9 +13,9 @@ namespace Mobile_Core
     };
     public enum RewardState
     {
-        COINS,
-        DOUBLE_COINS,
-        CHEST
+        STANDARD,
+        BOOSTER,
+        GIFT
     };
 
 
@@ -30,12 +25,13 @@ namespace Mobile_Core
 
 
         public static Action<GameState> OnGameStateUpdated;
+        public static Action<RewardState> OnRewardsChanged;
         public static Action<int> OnUpdateScore;
         public static Action<int> OnUpdateUI;
 
 
-
-        public GameState State { get; set; }
+        public RewardState RewardState { get; set; }
+        public GameState GameSate { get; set; }
 
         [ContextMenu("Reset Wallet")]
         public void ResetWallet()
@@ -72,19 +68,39 @@ namespace Mobile_Core
 
         void HandleAppSate(AppState state)
         {
-            if (state == AppState.PAUSE)
+            //if (state == AppState.PAUSE)
+            //{
+            //    Time.timeScale = 0;
+            //}
+            //else if (state == AppState.UPDATE)
+            //{
+            //    Time.timeScale = 1;
+            //}
+        }
+
+
+        public void UpdateRewardState(RewardState newState)
+        {
+            RewardState = newState;
+
+            switch (newState)
             {
-                Time.timeScale = 0;
+                case RewardState.STANDARD:
+                    break;
+                case RewardState.BOOSTER:
+                    break;
+                case RewardState.GIFT:
+                    break;
+                default:
+                    break;
             }
-            else if (state == AppState.UPDATE)
-            {
-                Time.timeScale = 1;
-            }
+
+            OnRewardsChanged?.Invoke(newState);
         }
 
         public void UpdateGameState(GameState newState)
         {
-            State = newState;
+            GameSate = newState;
 
             switch (newState)
             {
@@ -107,6 +123,8 @@ namespace Mobile_Core
         void HandleVictory()
         {
             AppManager.Instance.UpdateAppState(AppState.PAUSE);
+            // set the first reward 
+            UpdateRewardState(RewardState.STANDARD);
             Debug.Log("You Won!");
         }
 

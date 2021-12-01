@@ -2231,7 +2231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFramerate: 60
-  pauseFramerate: 15
+  pauseFramerate: 30
 --- !u!4 &848116765
 Transform:
   m_ObjectHideFlags: 0
